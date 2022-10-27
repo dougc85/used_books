@@ -33,6 +33,13 @@
   justify-content: space-evenly;
 }
 
+.app-nav ul a:link,
+.app-nav ul a:visited,
+.app-nav ul a:active {
+  color: white;
+  text-decoration: none;
+}
+
 .app-nav ul a:hover {
   cursor: pointer;
 }
