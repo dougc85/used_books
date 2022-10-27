@@ -1,0 +1,38 @@
+.app-header {
+  background-color: blue;
+  color: white;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 20px 40px;
+}
+
+.app-heading {
+  font-size: 4rem;
+  text-align: center;
+}
+
+.app-heading-first {
+  border-bottom: 1px solid white;
+  padding-bottom: 6px;
+}
+
+.app-heading span {
+  display: block;
+
+}
+
+.app-nav {
+  flex: 1;
+}
+
+.app-nav ul {
+  list-style-type: none;
+  font-size: 3rem;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.app-nav ul a:hover {
+  cursor: pointer;
+}

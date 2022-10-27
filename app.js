@@ -11,6 +11,8 @@ const mongoDB = secrets.mongoURI;
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
+app.use(express.static("public"));
+
 app.get("/", getIndex);
 app.use("/", get404);
 
