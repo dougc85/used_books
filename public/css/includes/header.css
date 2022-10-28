@@ -4,7 +4,7 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding: 20px 40px;
+  padding: 20px 0 10px 40px;
 }
 
 .app-heading {
@@ -19,7 +19,6 @@
 
 .app-heading span {
   display: block;
-
 }
 
 .app-nav {

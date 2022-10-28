@@ -26,7 +26,7 @@ h3 span {
   font-weight: normal;
 }
 
-p {
+main p {
   padding-bottom: 2rem;
   font-size: 2rem;
 }
@@ -38,14 +38,13 @@ p {
   color: black;
   padding: 5px;
   border-radius: 5px;
-
 }
 
-ul {
+main ul {
   list-style-type: none;
 }
 
-li {
+main li {
   margin-bottom: .5rem;
   font-size: 1.6rem;
 }
