@@ -6,7 +6,7 @@ section {
   padding-bottom: 3rem;
 }
 
-section * {
+section>* {
   margin-left: 2rem;
 }
 
@@ -19,12 +19,19 @@ h3 {
   margin-left: 0;
 }
 
+h3 span {
+  display: inline-block;
+  margin-left: .5rem;
+  font-size: 1.6rem;
+  font-weight: normal;
+}
+
 p {
   padding-bottom: 2rem;
   font-size: 2rem;
 }
 
-main a {
+.add-author-instructions a {
   font-size: 2rem;
   border: 1px solid black;
   text-decoration: none;
@@ -32,4 +39,17 @@ main a {
   padding: 5px;
   border-radius: 5px;
 
+}
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  margin-bottom: .5rem;
+  font-size: 1.6rem;
+}
+
+.author-list a:hover {
+  border-bottom: 1px solid black;
 }

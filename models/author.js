@@ -10,11 +10,11 @@ const authorSchema = new Schema({
     type: String,
     required: true
   },
-  birthYear: {
+  birthyear: {
     type: Number,
-    required: True,
+    required: true,
   },
-  deathYear: {
+  deathyear: {
     type: Number
   },
   biography: {

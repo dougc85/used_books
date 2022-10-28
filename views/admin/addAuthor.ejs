@@ -7,7 +7,7 @@
   <%- include('../includes/header.ejs') %>
   <main>
     <h2>Add an Author</h2>
-    <form>
+    <form action="/admin/authors/add" method="POST">
       <div class="add-author-field">
         <label for="add-author-firstname">First Name</label>
         <input id="add-author-firstname" name="firstname" type="text">
@@ -22,7 +22,7 @@
       </div>
       <div class="add-author-field">
         <label for="add-author-deathyear">Death Year</label>
-        <input id="add-author-deathyear" name="deathyear" type="number" max="9999" required>
+        <input id="add-author-deathyear" name="deathyear" type="number" max="9999">
       </div>
       <div class="add-author-field">
         <label for="add-author-bio">Biography<span>*</span></label>

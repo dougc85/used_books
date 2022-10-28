@@ -7,7 +7,7 @@
   <%- include('../includes/header.ejs') %>
   <main>
     <h2>Manage Authors</h2>
-    <section>
+    <section class="add-author-instructions">
       <h3>Add an Author</h3>
       <p>
         Before adding an author, look through the list below to see if the author is already in the database.
@@ -15,12 +15,18 @@
       <a href="/admin/authors/add">Add</a>
     </section>
 
-    <section>
+    <section class="author-list">
       <h3>
-        List of Authors
+        List of Authors <span>(Click author name to edit)</span>
       </h3>
       <ul>
-
+        <% for (author of authors) {%>
+        <li>
+          <a href="/admin/authors/<%= author._id%>">
+            <%= author.firstname ? author.firstname + " " + author.lastname : author.lastname %>
+          </a>
+        </li>
+        <% } %>
       </ul>
     </section>
 
