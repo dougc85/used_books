@@ -1,0 +1,30 @@
+main {
+  padding: 2rem;
+  text-align: center;
+}
+
+.author-info {
+  font-size: 2rem;
+}
+
+.author-dates {
+  margin-bottom: 2.5rem;
+}
+
+.author-bio {
+  max-width: 900px;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+}
+
+.author-image {
+  height: 200px;
+  margin-bottom: 2.5rem;
+}
+
+.author-edit-link {
+  padding: .5rem;
+  font-size: 1.6rem;
+  border: 1px solid black;
+  border-radius: 5px;
+}

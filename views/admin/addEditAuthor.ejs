@@ -1,0 +1,47 @@
+<%- include('../includes/head.ejs') %>
+
+<link rel="stylesheet" href="/css/admin/admin-add-edit-author.css">
+</head>
+
+<body>
+  <%- include('../includes/header.ejs') %>
+  <main>
+    <h2><%= edit ? 'Edit Author' : 'Add an Author' %></h2>
+    <form action="<%= edit ? '/admin/authors/' + author._id + '/edit' : '/admin/authors/add' %>" method="POST">
+      <div class="add-author-field">
+        <label for="add-author-firstname">First Name</label>
+        <input id="add-author-firstname" name="firstname" type="text" value="<%= edit ? author.firstname : '' %>">
+      </div>
+      <div class="add-author-field">
+        <label for="add-author-lastname">Last Name<span>*</span></label>
+        <input id="add-author-lastname" name="lastname" type="text" required value="<%= edit ? author.lastname : '' %>">
+      </div>
+      <div class="add-author-field">
+        <label for="add-author-lastname">Image URL</label>
+        <input id="add-author-lastname" name="imageURL" type="text" value="<%= edit ? author.imageURL : '' %>">
+      </div>
+      <div class="add-author-field">
+        <label for="add-author-birthyear">Birth Year<span>*</span></label>
+        <input id="add-author-birthyear" name="birthyear" type="number" max="9999" required value="<%= edit ? author.birthyear : '' %>">
+      </div>
+      <div class="add-author-field">
+        <label for="add-author-deathyear">Death Year</label>
+        <input id="add-author-deathyear" name="deathyear" type="number" max="9999" value="<%= edit ? author.deathyear : '' %>">
+      </div>
+      <div class="add-author-field">
+        <label for="add-author-bio">Biography<span>*</span></label>
+        <textarea id="add-author-bio" name="biography" required rows="8"><%= edit ? author.biography : '' %></textarea>
+      </div>
+      <% if (edit) { %>
+      <input value="<%= author._id %>" type="hidden" name="authorId">
+      <% } %>
+      <p>*required</p>
+      <button>Submit</button>
+    </form>
+  </main>
+  <footer>
+
+  </footer>
+</body>
+
+</html>

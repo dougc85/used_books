@@ -6,7 +6,36 @@
 <body>
   <%- include('../includes/header.ejs') %>
   <main>
+    <h2>Manage Books</h2>
+    <section class="book-instructions">
+      <h3>Add Book To Catalog</h3>
+      <p>
+        Before adding an book, look through the list below to see if the book is already in the database.
+      </p>
+      <a href="/admin/books/add">Add</a>
+    </section>
 
+    <section class="book-instructions">
+      <h3>Add to Inventory</h3>
+      <p>
+        To add a book to the store's inventory, click on the book's title below and then add any necessary additional information.
+      </p>
+    </section>
+
+    <section class="book-list">
+      <h3>
+        List of Books <span>(Click book name to edit or add to store inventory)</span>
+      </h3>
+      <ul>
+        <% for (book of books) {%>
+        <li>
+          <a href="/admin/books/<%= book._id%>">
+            <%= book.firstname ? book.firstname + " " + book.lastname : book.lastname %>
+          </a>
+        </li>
+        <% } %>
+      </ul>
+    </section>
 
   </main>
   <footer>

@@ -10,6 +10,9 @@ const authorSchema = new Schema({
     type: String,
     required: true
   },
+  imageURL: {
+    type: String
+  },
   birthyear: {
     type: Number,
     required: true,
