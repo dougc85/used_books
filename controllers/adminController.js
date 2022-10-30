@@ -98,6 +98,37 @@ exports.getBookCatalogue = (req, res, next) => {
     })
 }
 
+exports.getAddBookToCatalogue = (req, res, next) => {
+  res.render('admin/addEditCatalogueBook', { edit: false });
+}
+
+exports.postAddBookToCatalogue = (req, res, next) => {
+  const {
+    firstname,
+    lastname,
+    imageURL,
+    birthyear,
+    deathyear,
+    biography
+  } = req.body;
+
+  const book = new Book({
+    firstname: firstname.trim(),
+    lastname: lastname.trim(),
+    imageURL: imageURL.trim(),
+    birthyear,
+    deathyear,
+    biography: biography.trim(),
+  })
+  book.save()
+    .then(() => {
+      res.redirect("/admin/book_catalogue");
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+}
+
 exports.getGenres = (req, res, next) => {
   Genre
     .find()
@@ -148,3 +179,4 @@ exports.postEditGenre = (req, res, next) => {
       console.log(err);
     })
 }
+

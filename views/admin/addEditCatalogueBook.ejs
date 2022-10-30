@@ -1,0 +1,37 @@
+<%- include('../includes/head.ejs') %>
+
+<link rel="stylesheet" href="/css/admin/admin-add-edit-catalogue-book.css">
+</head>
+
+<body>
+  <%- include('../includes/header.ejs') %>
+  <main>
+    <h2><%= edit ? 'Edit Book' : 'Add A Book To The Catalogue' %></h2>
+    <form action="<%= edit ? '/admin/book_catalogue/' + book._id + '/edit' : '/admin/book_catalogue/add' %>" method="POST">
+      <div class="add-book-field">
+        <label for="add-book-title">Title</label>
+        <input id="add-book-title" name="title" type="text" value="<%= edit ? book.title : '' %>">
+      </div>
+      <div class="add-book-field">
+        <label for="add-book-author">Author</label>
+        <select id="add-book-author" name="author" value="<%= edit ? 'poopoo' : '' %>">
+
+        </select>
+      </div>
+      <div class="add-book-field">
+        <label for="add-book-description">Description<span>*</span></label>
+        <textarea id="add-book-description" name="description" required rows="8"><%= edit ? book.description : '' %></textarea>
+      </div>
+      <% if (edit) { %>
+      <input value="<%= book._id %>" type="hidden" name="bookId">
+      <% } %>
+      <p>*required</p>
+      <button>Submit</button>
+    </form>
+  </main>
+  <footer>
+
+  </footer>
+</body>
+
+</html>

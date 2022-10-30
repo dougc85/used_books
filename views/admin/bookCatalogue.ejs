@@ -12,7 +12,7 @@
       <p>
         Before adding an book, look through the list below to see if the book is already in the database.
       </p>
-      <a href="/admin/books/add">Add</a>
+      <a href="/admin/book_catalogue/add">Add</a>
     </section>
 
     <section class="book-list">
@@ -22,8 +22,8 @@
       <ul>
         <% for (book of books) {%>
         <li>
-          <a href="/admin/books/<%= book._id%>">
-            <%= book.firstname ? book.firstname + " " + book.lastname : book.lastname %>
+          <a href="/admin/book_catalogue/<%= book._id%>">
+            <%= book.title %>
           </a>
         </li>
         <% } %>

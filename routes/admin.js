@@ -3,6 +3,8 @@ const {
   getIndex,
   getAuthors,
   getBookCatalogue,
+  getAddBookToCatalogue,
+  postAddBookToCatalogue,
   getAddAuthor,
   postAddAuthor,
   getAuthorPage,
@@ -29,7 +31,9 @@ router.get("/authors/:authorId/edit", getEditAuthorPage);
 router.post("/authors/:authorId/edit", postEditAuthorPage);
 
 
-router.get("/bookCatalogue", getBookCatalogue);
+router.get("/book_catalogue", getBookCatalogue);
+router.get("/book_catalogue/add", getAddBookToCatalogue);
+router.get("/book_catalogue/add", postAddBookToCatalogue)
 
 router.get("/genres", getGenres);
 router.get("/genres/add", getAddGenre);
