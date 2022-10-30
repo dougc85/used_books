@@ -1,0 +1,26 @@
+<%- include('../includes/head.ejs') %>
+
+<link rel="stylesheet" href="/css/admin/admin-add-edit-genre.css">
+</head>
+
+<body>
+  <%- include('../includes/header.ejs') %>
+  <main>
+    <h2><%= edit ? 'Edit Genre' : 'Add a Genre' %></h2>
+    <form action="<%= edit ? '/admin/genres/' + genre._id + '/edit' : '/admin/genres/add' %>" method="POST">
+      <div class="add-genre-field">
+        <label for="genre-name">Genre Name</label>
+        <input id="genre-name" name="genre" type="text" value="<%= edit ? genre.genre : '' %>">
+      </div>
+      <% if (edit) { %>
+      <input value="<%= genre._id %>" type="hidden" name="genreId">
+      <% } %>
+      <button>Submit</button>
+    </form>
+  </main>
+  <footer>
+
+  </footer>
+</body>
+
+</html>

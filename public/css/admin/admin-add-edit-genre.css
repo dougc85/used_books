@@ -1,0 +1,53 @@
+main {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h2 {
+  padding-bottom: 2rem;
+}
+
+form {
+  width: max-content;
+}
+
+form p {
+  color: red;
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+}
+
+.add-genre-field {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+label {
+  font-size: 1.8rem;
+  width: 10rem;
+}
+
+label span {
+  color: red;
+  margin-left: 3px;
+}
+
+input,
+textarea {
+  font-size: 1.6rem;
+  display: block;
+  width: 25rem;
+}
+
+button {
+  display: block;
+  background-color: white;
+  border: 1px solid black;
+  padding: .5rem;
+  font-size: 2rem;
+  border-radius: 5px;
+  margin: 0 auto;
+}

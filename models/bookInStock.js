@@ -19,6 +19,12 @@ const bookInStockSchema = new Schema({
   },
   translator: {
     type: String,
+  },
+  editor: {
+    type: String,
+  },
+  edition: {
+    type: String,
   }
 })
 

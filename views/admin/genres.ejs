@@ -1,0 +1,39 @@
+<%- include('../includes/head.ejs') %>
+
+<link rel="stylesheet" href="/css/admin/admin-genres.css">
+</head>
+
+<body>
+  <%- include('../includes/header.ejs') %>
+  <main>
+    <h2>Manage Genres</h2>
+    <section class="add-genre-instructions">
+      <h3>Add an Genre</h3>
+      <p>
+        Before adding an genre, look through the list below to see if the genre is already in the database.
+      </p>
+      <a href="/admin/genres/add">Add</a>
+    </section>
+
+    <section class="genre-list">
+      <h3>
+        List of Genres <span>(Click genre name to edit)</span>
+      </h3>
+      <ul>
+        <% for (genre of genres) {%>
+        <li>
+          <a href="/admin/genres/<%= genre._id%>/edit">
+            <%= genre.genre %>
+          </a>
+        </li>
+        <% } %>
+      </ul>
+    </section>
+
+  </main>
+  <footer>
+
+  </footer>
+</body>
+
+</html>
