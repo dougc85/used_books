@@ -1,0 +1,40 @@
+main {
+  padding: 2rem;
+  text-align: center;
+}
+
+.book-title {
+  margin-bottom: .5rem;
+}
+
+.book-info {
+  font-size: 2rem;
+}
+
+.book-author {
+  margin-bottom: 1.5rem;
+}
+
+.book-image {
+  height: 200px;
+  margin-bottom: 2.5rem;
+}
+
+.book-description {
+  max-width: 900px;
+  margin: 0 auto;
+  margin-bottom: 1.5rem;
+}
+
+.book-genre {
+  margin-bottom: 2rem;
+}
+
+
+
+.book-edit-link {
+  padding: .5rem;
+  font-size: 1.6rem;
+  border: 1px solid black;
+  border-radius: 5px;
+}

@@ -21,6 +21,10 @@ const bookSchema = new Schema({
     type: String,
     required: true,
   },
+  imageURL: {
+    type: String,
+    required: true,
+  },
   awards: {
     type: [String]
   }

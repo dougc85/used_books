@@ -1,0 +1,24 @@
+<%- include('../includes/head.ejs')%>
+
+<link rel="stylesheet" href="/css/admin/admin-catalogue-book.css">
+</head>
+
+<body>
+  <%- include('../includes/header.ejs') %>
+  <main>
+    <h2 class="book-title"><%= book.title %></h2>
+    <p class="book-author book-info">
+      by <%= book.author.firstname ? book.author.firstname + " " + book.author.lastname : book.author.lastname %>
+    </p>
+    <img class="book-image" src="<%= book.imageURL ? book.imageURL : 'https://www.daysoftheyear.com/cdn-cgi/image/dpr=1%2Cf=auto%2Cfit=cover%2Cheight=675%2Cmetadata=none%2Conerror=redirect%2Cq=85%2Cwidth=1200/wp-content/uploads/world-book-day-scaled.jpg' %>" alt="<%= book.imageURL ? book.title : 'imageURL not provided' %> ">
+    <p class="book-description book-info">
+      <%= book.description %>
+    </p>
+    <p class="book-genre book-info">
+      Genre: <%= book.genre.genre %>
+    </p>
+    <a class="book-edit-link" href="/admin/book_catalogue/<%= book._id %>/edit">Edit Book Info</a>
+  </main>
+</body>
+
+</html>
