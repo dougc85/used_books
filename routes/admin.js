@@ -1,6 +1,15 @@
 const express = require('express');
 
 const {
+  getInventory,
+  getAddToInventory,
+  postAddToInventory,
+  getInventoryBook,
+  getEditInventoryCopy,
+  postEditInventoryCopy,
+} = require('../controllers/adminControllers/inventoryController');
+
+const {
   getAuthors,
   getAddAuthor,
   postAddAuthor,
@@ -31,6 +40,14 @@ router.get("/", (req, res, next) => {
 });
 
 
+router.get("/inventory", getInventory);
+router.get("/inventory/add", getAddToInventory);
+router.post("/inventory/add", postAddToInventory);
+router.get("/inventory/:bookId", getInventoryBook);
+router.get("/inventory/:bookId/:copyId", getEditInventoryCopy);
+router.post("/inventory/:bookId/:copyId", postEditInventoryCopy)
+
+
 router.get("/authors", getAuthors);
 
 router.get("/authors/add", getAddAuthor);
@@ -40,13 +57,16 @@ router.get("/authors/:authorId/edit", getEditAuthorPage);
 router.post("/authors/:authorId/edit", postEditAuthorPage);
 
 
+
 router.get("/book_catalogue", getBookCatalogue);
 
 router.get("/book_catalogue/add", getAddBookToCatalogue);
 router.post("/book_catalogue/add", postAddBookToCatalogue);
 router.get("/book_catalogue/:bookId", getCatalogueBookPage);
 
+
 router.get("/genres", getGenres);
+
 router.get("/genres/add", getAddGenre);
 router.post("/genres/add", postAddGenre);
 router.get("/genres/:genreId/edit", getEditGenre);

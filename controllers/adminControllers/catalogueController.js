@@ -46,7 +46,15 @@ exports.postAddBookToCatalogue = (req, res, next) => {
     genre,
     description: description.trim(),
   })
+
   book.save()
+    .then((book) => {
+      return Author.findOneAndUpdate({ _id: author }, {
+        $push: {
+          "books": book._id,
+        }
+      })
+    })
     .then(() => {
       res.redirect("/admin/book_catalogue");
     })
@@ -64,3 +72,4 @@ exports.getCatalogueBookPage = (req, res, next) => {
       res.render('admin/catalogueBook', { book });
     })
 }
+

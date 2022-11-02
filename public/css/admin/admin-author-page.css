@@ -22,6 +22,30 @@ main {
   margin-bottom: 2.5rem;
 }
 
+.author-books {
+  margin-bottom: 2rem;
+}
+
+.author-books-heading {
+  margin-bottom: 1.5rem;
+}
+
+.author-books-list {
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-evenly;
+  max-width: 800px;
+  list-style: none;
+}
+
+.author-book-image {
+  height: 200px;
+}
+
+.author-book-title {
+  font-size: 1.6rem;
+}
+
 .author-edit-link {
   padding: .5rem;
   font-size: 1.6rem;

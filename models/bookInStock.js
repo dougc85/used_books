@@ -8,6 +8,9 @@ const bookInStockSchema = new Schema({
     required: true,
     ref: 'Book'
   },
+  imageURL: {
+    type: String,
+  },
   yearPublished: {
     type: Number,
     required: true,

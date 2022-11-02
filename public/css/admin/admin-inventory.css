@@ -1,0 +1,54 @@
+main {
+  padding: 2rem;
+}
+
+section {
+  padding-bottom: 3rem;
+}
+
+section>* {
+  margin-left: 2rem;
+}
+
+h2 {
+  padding-bottom: 3rem;
+}
+
+h3 {
+  padding-bottom: 2rem;
+  margin-left: 0;
+}
+
+h3 span {
+  display: inline-block;
+  margin-left: .5rem;
+  font-size: 1.6rem;
+  font-weight: normal;
+}
+
+main p {
+  padding-bottom: 2rem;
+  font-size: 2rem;
+}
+
+.add-copy-instructions a {
+  font-size: 2rem;
+  border: 1px solid black;
+  text-decoration: none;
+  color: black;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+main ul {
+  list-style-type: none;
+}
+
+main li {
+  margin-bottom: .5rem;
+  font-size: 1.6rem;
+}
+
+.inventory-list a:hover {
+  border-bottom: 1px solid black;
+}

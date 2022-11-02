@@ -27,7 +27,12 @@ const bookSchema = new Schema({
   },
   awards: {
     type: [String]
-  }
+  },
+  copies: [{
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: 'BookInStock'
+  }]
 });
 
 module.exports = mongoose.model('Book', bookSchema);

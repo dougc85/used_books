@@ -25,3 +25,7 @@ main a {
   font-size: 3rem;
   border-bottom: 1px solid black;
 }
+
+main .inventory-link {
+  margin-bottom: 50px;
+}

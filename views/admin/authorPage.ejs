@@ -20,6 +20,18 @@
     <p class="author-bio author-info">
       <%= author.biography %>
     </p>
+    <div class="author-books">
+      <h3 class="author-books-heading">Books</h3>
+      <ul class="author-books-list">
+        <% for (let book of author.books) { %>
+        <li>
+          <img class="author-book-image" src="<%= book.imageURL %>" alt="<%= book.imageURL ? book.title : 'imageURL not provided' %> ">
+          <p class="author-book-title"><%= book.title %></p>
+        </li>
+        <% } %>
+      </ul>
+    </div>
+
     <a class="author-edit-link" href="/admin/authors/<%= author._id %>/edit">Edit Author Info</a>
 
 

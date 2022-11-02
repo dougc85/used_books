@@ -1,0 +1,67 @@
+<%- include('../includes/head.ejs') %>
+
+<link rel="stylesheet" href="/css/admin/admin-add-edit-inventory-book.css">
+</head>
+
+<body>
+  <%- include('../includes/header.ejs') %>
+  <main>
+    <h2><%= edit ? 'Edit Book In Inventory' : 'Add Copy To Inventory' %></h2>
+    <form action="<%= edit ? '/admin/inventory/' + bookInStock._id + '/edit' : '/admin/inventory/add' %>" method="POST">
+      <div class="add-copy-field">
+        <label for="add-copy-book">Book<span>*</span></label>
+        <select id="add-copy-book" name="book" value="<%= edit ? 'poopoo' : '' %>" required>
+          <% for (let book of catalogueBooks) { %>
+          <option value="<%= book._id %>">
+            <%= book.title %>
+          </option>
+          <% } %>
+        </select>
+      </div>
+      <div class="add-copy-field">
+        <label for="add-copy-year-published">Year Published<span>*</span></label>
+        <input id="add-copy-year-published" name="yearPublished" type="number" max="9999" required value="<%= edit ? copy.yearPublished : '' %>">
+      </div>
+      <div class="add-copy-field">
+        <label for="add-copy-condition">Condition<span>*</span></label>
+        <select id="add-copy-condition" name="condition" value="<%= edit ? 'poopoo' : '' %>" required>
+          <% for (let condition of conditions) { %>
+          <option value="<%= condition %>">
+            <%= condition %>
+          </option>
+          <% } %>
+        </select>
+      </div>
+      <div class="add-copy-field">
+        <label for="add-copy-price">Price ($)<span>*</span></label>
+        <input id="add-copy-price" name="price" type="number" step=".01" required value="<%= edit ? copy.price : '' %>">
+      </div>
+      <div class="add-copy-field">
+        <label for="add-copy-imageURL">Image URL (for this edition)</label>
+        <input id="add-copy-imageURL" name="imageURL" type="text" value="<%= edit ? copy.imageURL : '' %>">
+      </div>
+      <div class="add-copy-field">
+        <label for="add-copy-translator">Translator</label>
+        <input id="add-copy-translator" name="translator" type="text" value="<%= edit ? copy.translator : '' %>">
+      </div>
+      <div class="add-copy-field">
+        <label for="add-copy-editor">Editor</label>
+        <input id="add-copy-editor" name="editor" type="text" value="<%= edit ? copy.editor : '' %>">
+      </div>
+      <div class="add-copy-field">
+        <label for="add-copy-edition">Edition</label>
+        <input id="add-copy-edition" name="edition" type="text" value="<%= edit ? copy.edition : '' %>">
+      </div>
+      <% if (edit) { %>
+      <input value="<%= copy._id %>" type="hidden" name="copyId">
+      <% } %>
+      <p>*required</p>
+      <button>Submit</button>
+    </form>
+  </main>
+  <footer>
+
+  </footer>
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+<%- include('../includes/head.ejs') %>
+
+<link rel="stylesheet" href="/css/admin/admin-inventory.css">
+</head>
+
+<body>
+  <%- include('../includes/header.ejs') %>
+  <main>
+    <h2>Manage Inventory</h2>
+    <section class="add-copy-instructions">
+      <h3>Add a Copy of a Book to the Inventory</h3>
+      <a href="/admin/inventory/add">Add to Inventory</a>
+    </section>
+
+    <section class="inventory-list">
+      <h3>
+        Inventory <span>(Click book name to see and edit copies)</span>
+      </h3>
+      <ul>
+        <% for (book of catalogueBooks) {%>
+        <li>
+          <a href="/admin/inventory/<%= book._id%>"><%= book.title %></a><%= " - " + book.copies.length + (book.copies.length === 1 ? " copy" : " copies")%>
+        </li>
+        <% } %>
+      </ul>
+    </section>
+
+  </main>
+</body>
+
+</html>
