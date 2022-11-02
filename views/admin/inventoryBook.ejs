@@ -1,0 +1,35 @@
+<%- include('../includes/head.ejs')%>
+
+<link rel="stylesheet" href="/css/admin/admin-inventory-book.css">
+</head>
+
+<body>
+  <%- include('../includes/header.ejs') %>
+  <main>
+    <h2 class="inventory-book-title">Copies of <span><%= book.title %></span>:</h2>
+    <p class="inventory-book-instructions">(Click on a copy's cover to edit its details)</p>
+    <ul class="inventory-copies">
+      <% for (let copy of book.copies) { %>
+      <li class="inventory-copy">
+        <a href="<%= '/admin/inventory/' + book._id + '/' + copy._id %>"><img class="copy-image" src="<%= copy.imageURL %>" alt="Cover of <%= copy.yearPublished %> edition"></a>
+        <div class="copy-info">
+          <p class="copy-price"><%= copy.price %></p>
+          <p class="copy-condition"><%= copy.condition %></p>
+          <p class="copy-year-published"><%= copy.yearPublished %></p>
+          <% if (copy.translator) { %>
+          <p class="copy-translator"><%= copy.translator %></p>
+          <% } %>
+          <% if (copy.editor) { %>
+          <p class="copy-editor"><%= copy.editor %></p>
+          <% } %>
+          <% if (copy.edition) { %>
+          <p class="copy-edition"><%= copy.edition %></p>
+          <% } %>
+        </div>
+      </li>
+      <% }%>
+    </ul>
+  </main>
+</body>
+
+</html>

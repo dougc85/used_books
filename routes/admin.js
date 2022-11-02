@@ -31,6 +31,8 @@ const {
   getAddBookToCatalogue,
   postAddBookToCatalogue,
   getCatalogueBookPage,
+  getEditCatalogueBookPage,
+  postEditCatalogueBookPage,
 } = require('../controllers/adminControllers/catalogueController');
 
 const router = express.Router();
@@ -63,6 +65,8 @@ router.get("/book_catalogue", getBookCatalogue);
 router.get("/book_catalogue/add", getAddBookToCatalogue);
 router.post("/book_catalogue/add", postAddBookToCatalogue);
 router.get("/book_catalogue/:bookId", getCatalogueBookPage);
+router.get("/book_catalogue/:bookId/edit", getEditCatalogueBookPage)
+router.post("/book_catalogue/:bookId/edit", postEditCatalogueBookPage)
 
 
 router.get("/genres", getGenres);

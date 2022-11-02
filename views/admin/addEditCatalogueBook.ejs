@@ -14,13 +14,14 @@
       </div>
       <div class="add-book-field">
         <label for="add-book-imageURL">Image URL</label>
-        <input id="add-book-imageURL" name="imageURL" type="text" value="<%= edit ? book.title : '' %>">
+        <input id="add-book-imageURL" name="imageURL" type="text" value="<%= edit ? book.imageURL : '' %>">
       </div>
       <div class="add-book-field">
         <label for="add-book-author">Author</label>
-        <select id="add-book-author" name="author" value="<%= edit ? 'poopoo' : '' %>">
+        <select id="add-book-author" name="author">
           <% for (let author of authors) { %>
-          <option value="<%= author._id %>">
+          <% console.log(book?.author.toString() === author._id.toString(), 'huh?')%>
+          <option value="<%= author._id %>" <%- book?.author.toString() === author._id.toString() ? 'selected' : '' %>>
             <%= author.firstname ? author.firstname + " " + author.lastname : author.lastname %>
           </option>
           <% } %>
@@ -28,9 +29,9 @@
       </div>
       <div class="add-book-field">
         <label for="add-book-genre">Genre</label>
-        <select id="add-book-genre" name="genre" value="<%= edit ? 'poopoo' : '' %>">
+        <select id="add-book-genre" name="genre">
           <% for (let genre of genres) { %>
-          <option value="<%= genre._id %>">
+          <option value="<%= genre._id %>" <%- book?.genre.toString() === genre._id.toString() ? 'selected' : '' %>>
             <%= genre.genre %>
           </option>
           <% } %>

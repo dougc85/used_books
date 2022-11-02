@@ -1,0 +1,41 @@
+main {
+  padding: 2rem;
+}
+
+h2 {
+  font-weight: normal;
+  margin-bottom: 1rem;
+}
+
+h2 span {
+  font-weight: bold;
+}
+
+.inventory-book-instructions {
+  margin-bottom: 2rem;
+  font-size: 1.6rem;
+}
+
+.inventory-copies {
+  border-top: 1px solid black;
+  padding-top: 2rem;
+}
+
+.inventory-copy {
+  display: flex;
+  align-items: center;
+  font-size: 1.6rem;
+  margin-bottom: 2rem;
+}
+
+.copy-info {
+  display: flex;
+}
+
+.copy-info p {
+  margin-right: 1rem;
+}
+
+.copy-image {
+  height: 100px;
+}

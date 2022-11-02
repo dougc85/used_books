@@ -45,7 +45,6 @@ exports.getAuthorPage = (req, res, next) => {
   Author.findById(req.params.authorId)
     .populate("books", "title imageURL")
     .then((author) => {
-      console.log(author, 'author');
       res.render('admin/authorPage', { author });
     });
 }

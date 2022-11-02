@@ -73,3 +73,47 @@ exports.getCatalogueBookPage = (req, res, next) => {
     })
 }
 
+exports.getEditCatalogueBookPage = (req, res, next) => {
+  const genresPromise = Genre.find()
+    .sort({ "genre": 1 });
+
+  const authorsPromise = Author
+    .find()
+    .sort({ "lastname": 1, "firstname": 1, "birthyear": 1 })
+    .select('lastname firstname');
+
+  const bookPromise = Book
+    .findById(req.params.bookId);
+
+  Promise.all([authorsPromise, genresPromise, bookPromise])
+    .then(resultsArray => {
+      const [authors, genres, book] = resultsArray;
+      res.render('admin/addEditCatalogueBook', { authors, genres, book, edit: true })
+    })
+    .catch(err => { console.log(err) });
+}
+
+exports.postEditCatalogueBookPage = (req, res, next) => {
+  const {
+    title,
+    imageURL,
+    author,
+    genre,
+    description,
+    bookId
+  } = req.body;
+
+  Book.findOneAndUpdate({ _id: bookId }, {
+    title: title.trim(),
+    imageURL: imageURL.trim(),
+    author,
+    genre,
+    description: description.trim(),
+  })
+    .then((result) => {
+      res.redirect("/admin/book_catalogue/" + bookId);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+}

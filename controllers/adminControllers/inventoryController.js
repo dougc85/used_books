@@ -1,6 +1,8 @@
 const Book = require('../../models/book');
 const BookInStock = require('../../models/bookInStock');
 
+const conditions = ['Like New', 'Good', 'Fair', 'Poor'];
+
 exports.getInventory = (req, res, next) => {
   Book.find()
     .select('copies title')
@@ -20,7 +22,6 @@ exports.getInventory = (req, res, next) => {
 }
 
 exports.getAddToInventory = (req, res, next) => {
-  const conditions = ['Like New', 'Good', 'Fair', 'Poor'];
   Book.find()
     .select('title')
     .sort('title')
@@ -69,7 +70,12 @@ exports.postAddToInventory = (req, res, next) => {
 }
 
 exports.getInventoryBook = (req, res, next) => {
-
+  Book.findById(req.params.bookId)
+    .populate('copies')
+    .then((book) => {
+      console.log(book, 'book');
+      res.render('admin/inventoryBook', { book });
+    })
 }
 
 exports.getEditInventoryCopy = (req, res, next) => {

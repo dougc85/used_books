@@ -8,6 +8,10 @@ const bookInStockSchema = new Schema({
     required: true,
     ref: 'Book'
   },
+  price: {
+    type: Number,
+    required: true,
+  },
   imageURL: {
     type: String,
   },
