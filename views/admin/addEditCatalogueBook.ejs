@@ -20,7 +20,6 @@
         <label for="add-book-author">Author</label>
         <select id="add-book-author" name="author">
           <% for (let author of authors) { %>
-          <% console.log(book?.author.toString() === author._id.toString(), 'huh?')%>
           <option value="<%= author._id %>" <%- book?.author.toString() === author._id.toString() ? 'selected' : '' %>>
             <%= author.firstname ? author.firstname + " " + author.lastname : author.lastname %>
           </option>

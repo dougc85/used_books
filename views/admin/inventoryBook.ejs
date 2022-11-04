@@ -13,7 +13,7 @@
       <li class="inventory-copy">
         <a href="<%= '/admin/inventory/' + book._id + '/' + copy._id %>"><img class="copy-image" src="<%= copy.imageURL %>" alt="Cover of <%= copy.yearPublished %> edition"></a>
         <div class="copy-info">
-          <p class="copy-price"><%= copy.price %></p>
+          <p class="copy-price"> - $<%= copy.price %></p>
           <p class="copy-condition"><%= copy.condition %></p>
           <p class="copy-year-published"><%= copy.yearPublished %></p>
           <% if (copy.translator) { %>

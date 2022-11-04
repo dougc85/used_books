@@ -30,6 +30,7 @@ h2 span {
 
 .copy-info {
   display: flex;
+  margin-left: 1rem;
 }
 
 .copy-info p {

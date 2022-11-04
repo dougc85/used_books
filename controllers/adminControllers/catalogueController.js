@@ -26,7 +26,7 @@ exports.getAddBookToCatalogue = async (req, res, next) => {
     .then(resultsArray => {
       const [authors, genres] = resultsArray;
 
-      res.render('admin/addEditCatalogueBook', { authors, genres, edit: false })
+      res.render('admin/addEditCatalogueBook', { authors, genres, edit: false, book: undefined })
     })
 }
 

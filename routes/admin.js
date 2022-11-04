@@ -43,6 +43,7 @@ router.get("/", (req, res, next) => {
 
 
 router.get("/inventory", getInventory);
+
 router.get("/inventory/add", getAddToInventory);
 router.post("/inventory/add", postAddToInventory);
 router.get("/inventory/:bookId", getInventoryBook);

@@ -7,12 +7,12 @@
   <%- include('../includes/header.ejs') %>
   <main>
     <h2><%= edit ? 'Edit Book In Inventory' : 'Add Copy To Inventory' %></h2>
-    <form action="<%= edit ? '/admin/inventory/' + bookInStock._id + '/edit' : '/admin/inventory/add' %>" method="POST">
+    <form action="<%= edit ? '/admin/inventory/' + copy._id + '/edit' : '/admin/inventory/add' %>" method="POST">
       <div class="add-copy-field">
         <label for="add-copy-book">Book<span>*</span></label>
-        <select id="add-copy-book" name="book" value="<%= edit ? 'poopoo' : '' %>" required>
+        <select id="add-copy-book" name="book" required <%- edit ? 'disabled' : ''%>>
           <% for (let book of catalogueBooks) { %>
-          <option value="<%= book._id %>">
+          <option value="<%= book._id %>" <%- copy?.book.toString() === book._id.toString() ? 'selected' : '' %>>
             <%= book.title %>
           </option>
           <% } %>
@@ -24,9 +24,9 @@
       </div>
       <div class="add-copy-field">
         <label for="add-copy-condition">Condition<span>*</span></label>
-        <select id="add-copy-condition" name="condition" value="<%= edit ? 'poopoo' : '' %>" required>
+        <select id="add-copy-condition" name="condition" required>
           <% for (let condition of conditions) { %>
-          <option value="<%= condition %>">
+          <option value="<%= condition %>" <%- copy?.condition === condition ? 'selected' : '' %>>
             <%= condition %>
           </option>
           <% } %>
@@ -54,6 +54,7 @@
       </div>
       <% if (edit) { %>
       <input value="<%= copy._id %>" type="hidden" name="copyId">
+      <input value="<%= copy.book %>" type="hidden" name="bookId">
       <% } %>
       <p>*required</p>
       <button>Submit</button>

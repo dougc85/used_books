@@ -26,7 +26,7 @@ exports.getAddToInventory = (req, res, next) => {
     .select('title')
     .sort('title')
     .then(catalogueBooks => {
-      res.render("admin/addEditInventoryBook", { catalogueBooks, conditions, edit: false })
+      res.render("admin/addEditInventoryBook", { catalogueBooks, conditions, edit: false, copy: undefined })
     })
 }
 
@@ -80,8 +80,73 @@ exports.getInventoryBook = (req, res, next) => {
 
 exports.getEditInventoryCopy = (req, res, next) => {
 
+  const booksPromise = Book
+    .find()
+    .sort({ "title": 1 })
+    .select('title');
+
+  const copyPromise = BookInStock
+    .findById(req.params.copyId);
+
+  Promise.all([booksPromise, copyPromise])
+    .then(resultsArray => {
+      const [catalogueBooks, copy] = resultsArray;
+      res.render('admin/addEditInventoryBook', { conditions, catalogueBooks, copy, edit: true })
+    })
+    .catch(err => { console.log(err) });
 }
 
 exports.postEditInventoryCopy = (req, res, next) => {
+  const {
+    bookId,
+    yearPublished,
+    condition,
+    price,
+    imageURL,
+    translator,
+    editor,
+    edition,
+    copyId
+  } = req.body
 
+  BookInStock.findOneAndUpdate({ _id: copyId }, {
+    yearPublished,
+    condition,
+    price,
+    imageURL: imageURL.trim(),
+    translator: translator.trim(),
+    editor: editor.trim(),
+    edition: edition.trim(),
+  })
+    .then((result) => {
+      res.redirect("/admin/inventory/" + bookId);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+}
+
+exports.postEditCatalogueBookPage = (req, res, next) => {
+  const {
+    title,
+    imageURL,
+    author,
+    genre,
+    description,
+    bookId
+  } = req.body;
+
+  Book.findOneAndUpdate({ _id: bookId }, {
+    title: title.trim(),
+    imageURL: imageURL.trim(),
+    author,
+    genre,
+    description: description.trim(),
+  })
+    .then((result) => {
+      res.redirect("/admin/book_catalogue/" + bookId);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
 }
