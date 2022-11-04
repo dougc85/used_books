@@ -6,12 +6,12 @@ exports.getGenres = (req, res, next) => {
     .find()
     .sort({ "genre": 1 })
     .then((genres) => {
-      res.render('admin/genres', { genres });
+      res.render('admin/genres', { genres, backText: 'Admin', backHref: '/admin' });
     })
 }
 
 exports.getAddGenre = (req, res, next) => {
-  res.render('admin/addEditGenre', { edit: false });
+  res.render('admin/addEditGenre', { edit: false, backText: 'Genres', backHref: '/admin/genres' });
 }
 
 exports.postAddGenre = (req, res, next) => {
@@ -31,7 +31,7 @@ exports.postAddGenre = (req, res, next) => {
 exports.getEditGenre = (req, res, next) => {
   Genre.findById(req.params.genreId)
     .then((genre) => {
-      res.render('admin/addEditGenre', { genre, edit: true });
+      res.render('admin/addEditGenre', { genre, edit: true, backHref: '/admin/genres', backText: 'Genres' });
     });
 }
 

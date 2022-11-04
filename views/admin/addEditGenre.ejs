@@ -6,6 +6,7 @@
 <body>
   <%- include('../includes/header.ejs') %>
   <main>
+    <%- include('../includes/backButton.ejs') %>
     <h2><%= edit ? 'Edit Genre' : 'Add a Genre' %></h2>
     <form action="<%= edit ? '/admin/genres/' + genre._id + '/edit' : '/admin/genres/add' %>" method="POST">
       <div class="add-genre-field">

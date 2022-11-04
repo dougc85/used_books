@@ -6,12 +6,12 @@ exports.getAuthors = (req, res, next) => {
     .select('firstname lastname')
     .sort({ "lastname": 1, "firstname": 1, "birthyear": 1 })
     .then((authors) => {
-      res.render('admin/authors', { authors });
+      res.render('admin/authors', { authors, backText: 'Admin', backHref: '/admin' });
     })
 }
 
 exports.getAddAuthor = (req, res, next) => {
-  res.render('admin/addEditAuthor', { edit: false });
+  res.render('admin/addEditAuthor', { edit: false, backText: 'Authors', backHref: '/admin/authors' });
 }
 
 exports.postAddAuthor = (req, res, next) => {
@@ -45,14 +45,14 @@ exports.getAuthorPage = (req, res, next) => {
   Author.findById(req.params.authorId)
     .populate("books", "title imageURL")
     .then((author) => {
-      res.render('admin/authorPage', { author });
+      res.render('admin/authorPage', { author, backText: 'Authors', backHref: '/admin/authors' });
     });
 }
 
 exports.getEditAuthorPage = (req, res, next) => {
   Author.findById(req.params.authorId)
     .then((author) => {
-      res.render('admin/addEditAuthor', { author, edit: true });
+      res.render('admin/addEditAuthor', { author, edit: true, backHref: '/admin' + req.url.slice(0, -5), backText: 'Author Info' });
     });
 }
 

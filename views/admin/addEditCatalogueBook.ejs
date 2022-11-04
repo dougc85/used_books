@@ -6,6 +6,7 @@
 <body>
   <%- include('../includes/header.ejs') %>
   <main>
+    <%- include('../includes/backButton.ejs') %>
     <h2><%= edit ? 'Edit Book' : 'Add A Book To The Catalogue' %></h2>
     <form action="<%= edit ? '/admin/book_catalogue/' + book._id + '/edit' : '/admin/book_catalogue/add' %>" method="POST">
       <div class="add-book-field">

@@ -6,6 +6,7 @@
 <body>
   <%- include('../includes/header.ejs') %>
   <main>
+    <%- include('../includes/backButton.ejs') %>
     <h2 class="book-title"><%= book.title %></h2>
     <p class="book-author book-info">
       by <%= book.author.firstname ? book.author.firstname + " " + book.author.lastname : book.author.lastname %>

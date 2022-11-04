@@ -14,7 +14,7 @@ exports.getInventory = (req, res, next) => {
           bookArray.push(book);
         }
       }
-      res.render("admin/inventory", { catalogueBooks: bookArray });
+      res.render("admin/inventory", { catalogueBooks: bookArray, backText: 'Admin', backHref: '/admin' });
     })
     .catch(err => {
       console.log(err);
@@ -26,7 +26,7 @@ exports.getAddToInventory = (req, res, next) => {
     .select('title')
     .sort('title')
     .then(catalogueBooks => {
-      res.render("admin/addEditInventoryBook", { catalogueBooks, conditions, edit: false, copy: undefined })
+      res.render("admin/addEditInventoryBook", { catalogueBooks, conditions, edit: false, copy: undefined, backText: 'Inventory', backHref: '/admin/inventory' })
     })
 }
 
@@ -74,7 +74,7 @@ exports.getInventoryBook = (req, res, next) => {
     .populate('copies')
     .then((book) => {
       console.log(book, 'book');
-      res.render('admin/inventoryBook', { book });
+      res.render('admin/inventoryBook', { book, backText: 'Inventory', backHref: '/admin/inventory' });
     })
 }
 
@@ -88,10 +88,14 @@ exports.getEditInventoryCopy = (req, res, next) => {
   const copyPromise = BookInStock
     .findById(req.params.copyId);
 
+  console.log(req.url.lastIndexOf('/'));
+
+  const backURL = req.url.slice(0, req.url.lastIndexOf('/'));
+
   Promise.all([booksPromise, copyPromise])
     .then(resultsArray => {
       const [catalogueBooks, copy] = resultsArray;
-      res.render('admin/addEditInventoryBook', { conditions, catalogueBooks, copy, edit: true })
+      res.render('admin/addEditInventoryBook', { conditions, catalogueBooks, copy, edit: true, backHref: '/admin' + backURL, backText: 'Book Copies' })
     })
     .catch(err => { console.log(err) });
 }

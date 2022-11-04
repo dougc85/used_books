@@ -6,6 +6,7 @@
 <body>
   <%- include('../includes/header.ejs') %>
   <main>
+    <%- include('../includes/backButton.ejs') %>
     <h2><%= edit ? 'Edit Author' : 'Add an Author' %></h2>
     <form action="<%= edit ? '/admin/authors/' + author._id + '/edit' : '/admin/authors/add' %>" method="POST">
       <div class="add-author-field">

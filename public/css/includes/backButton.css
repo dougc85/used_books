@@ -1,0 +1,13 @@
+.back-link {
+  align-self: start;
+  text-align: center;
+}
+
+.back-link svg {
+  height: 35px;
+}
+
+.back-link span {
+  display: block;
+  font-size: 1.6rem;
+}

@@ -1,5 +1,8 @@
 main {
   padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 section {
@@ -11,6 +14,7 @@ section>* {
 }
 
 h2 {
+  margin-top: 2rem;
   padding-bottom: 3rem;
 }
 
@@ -31,6 +35,12 @@ main p {
   font-size: 2rem;
 }
 
+.add-copy-instructions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .add-copy-instructions a {
   font-size: 2rem;
   border: 1px solid black;
@@ -38,6 +48,7 @@ main p {
   color: black;
   padding: 5px;
   border-radius: 5px;
+  margin: 0;
 }
 
 main ul {

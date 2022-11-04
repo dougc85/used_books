@@ -8,7 +8,7 @@ exports.getBookCatalogue = (req, res, next) => {
     .select('title')
     .sort({ "title": 1 })
     .then((books) => {
-      res.render('admin/bookCatalogue', { books });
+      res.render('admin/bookCatalogue', { books, backText: 'Admin', backHref: '/admin' });
     })
 }
 
@@ -26,7 +26,7 @@ exports.getAddBookToCatalogue = async (req, res, next) => {
     .then(resultsArray => {
       const [authors, genres] = resultsArray;
 
-      res.render('admin/addEditCatalogueBook', { authors, genres, edit: false, book: undefined })
+      res.render('admin/addEditCatalogueBook', { authors, genres, edit: false, book: undefined, backText: 'Catalogue', backHref: '/admin/book_catalogue' })
     })
 }
 
@@ -69,7 +69,7 @@ exports.getCatalogueBookPage = (req, res, next) => {
     .populate('genre')
     .then((book) => {
       console.log(book, 'book');
-      res.render('admin/catalogueBook', { book });
+      res.render('admin/catalogueBook', { book, backText: 'Catalogue', backHref: '/admin/book_catalogue' });
     })
 }
 
@@ -88,7 +88,7 @@ exports.getEditCatalogueBookPage = (req, res, next) => {
   Promise.all([authorsPromise, genresPromise, bookPromise])
     .then(resultsArray => {
       const [authors, genres, book] = resultsArray;
-      res.render('admin/addEditCatalogueBook', { authors, genres, book, edit: true })
+      res.render('admin/addEditCatalogueBook', { authors, genres, book, edit: true, backHref: '/admin' + req.url.slice(0, -5), backText: 'Book Info' });
     })
     .catch(err => { console.log(err) });
 }
