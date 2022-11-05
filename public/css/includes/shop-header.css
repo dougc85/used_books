@@ -1,0 +1,24 @@
+.shop-nav {
+  background-color: rgb(91, 91, 91);
+  padding: 1rem;
+}
+
+.shop-nav ul {
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  font-size: 2rem;
+  list-style: none;
+  max-width: 750px;
+}
+
+.shop-nav li {
+  color: white;
+}
+
+.shop-nav a:active,
+.shop-nav a:visited,
+.shop-nav a:link,
+.shop-nav a:hover {
+  color: white;
+}

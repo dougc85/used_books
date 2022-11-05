@@ -1,6 +1,14 @@
 const express = require('express');
 
 const {
+  getFrontPage,
+  getEditPicksFront,
+  postEditPicksFront,
+  getEditAuthorFront,
+  postEditAuthorFront,
+} = require('../controllers/adminControllers/frontPageController');
+
+const {
   getInventory,
   getAddToInventory,
   postAddToInventory,
@@ -41,6 +49,13 @@ router.get("/", (req, res, next) => {
   res.render('admin/adminIndex');
 });
 
+
+router.get("/frontpage", getFrontPage);
+
+router.get("/frontpage/edit_picks", getEditPicksFront);
+router.post("/frontpage/edit_picks", postEditPicksFront);
+router.get("/frontpage/edit_author", getEditAuthorFront);
+router.post("/frontpage/edit_author", postEditAuthorFront);
 
 router.get("/inventory", getInventory);
 

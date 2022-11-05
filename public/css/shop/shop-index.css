@@ -1,0 +1,25 @@
+main {
+  background-color: rgb(248, 248, 248);
+  height: calc(100vh - 175px);
+  padding: 2rem;
+}
+
+h2 {
+  text-align: center;
+  font-size: 5rem;
+  margin-bottom: 1rem;
+}
+
+p {
+  font-size: 1.9rem;
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+}
+
+p span {
+  font-size: 1.6rem;
+  display: block;
+  margin-top: 1rem;
+}
