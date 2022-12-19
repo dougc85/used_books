@@ -3,7 +3,9 @@ const FrontPage = require('../../models/frontPage');
 const Author = require('../../models/author');
 
 exports.getFrontPage = (req, res, next) => {
-  res.render('admin/frontPageAdmin', { backText: 'Admin', backHref: '/admin' });
+  FrontPage.findOne().populate("suggestedBooks").then(frontPage => {
+    res.render('admin/frontPageAdmin', { backText: 'Admin', backHref: '/admin', suggestedBooks: frontPage.suggestedBooks });
+  })
 }
 
 exports.getEditPicksFront = (req, res, next) => {
@@ -17,7 +19,7 @@ exports.getEditPicksFront = (req, res, next) => {
       .exec();
 
   Promise.all([frontPromise, bookPromise]).then(([frontPage, books]) => {
-    res.render('admin/editPicks', { books, backText: 'Front Page Admin', backHref: '/admin/frontpage', oldPicks: frontPage.suggestedBooks });
+    res.render('admin/editPicks', { books, backText: 'Front Page Admin', backHref: '/admin/frontpage', oldPicks: frontPage.suggestedBooks, emphasizeFour: false });
   });
 }
 
@@ -36,7 +38,18 @@ exports.postEditPicksFront = (req, res, next) => {
         res.redirect('/admin/frontpage');
       })
   } else {
-    res.redirect('/admin/frontpage/edit_picks');
+    const frontPromise = FrontPage.findOne().exec();
+
+    const bookPromise =
+      Book
+        .find()
+        .select('title imageURL')
+        .sort({ "title": 1 })
+        .exec();
+
+    Promise.all([frontPromise, bookPromise]).then(([frontPage, books]) => {
+      res.render('admin/editPicks', { books, backText: 'Front Page Admin', backHref: '/admin/frontpage', oldPicks: frontPage.suggestedBooks, emphasizeFour: true });
+    });
   }
 }
 

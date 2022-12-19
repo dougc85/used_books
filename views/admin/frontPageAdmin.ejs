@@ -11,7 +11,11 @@
     <section class="edit-frontpage frontpage-picks">
       <h3>Current "Doug's Picks"</h3>
       <ul>
-        list of picks
+        <% suggestedBooks.forEach(book => { %>
+        <li>
+          <img src="<%= book.imageURL %>" alt="book.title">
+        </li>
+        <% }) %>
       </ul>
       <a href="/admin/frontpage/edit_picks">Choose Featured Books</a>
     </section>

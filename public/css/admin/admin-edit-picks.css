@@ -16,7 +16,14 @@ h2 span {
   margin-top: 1rem;
 }
 
-form {}
+.emphasize-four {
+  color: red;
+}
+
+form {
+  display: grid;
+  width: 80%;
+}
 
 .featured-book-option {
   display: flex;

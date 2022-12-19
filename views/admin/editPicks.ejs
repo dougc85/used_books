@@ -9,7 +9,7 @@
     <%- include('../includes/backButton.ejs') %>
     <h2>
       Choose Featured Books
-      <span>Select Any Number (4 is suggested)</span>
+      <span class="<%= emphasizeFour ? 'emphasize-four' : null %>">Select 4</span>
     </h2>
     <form action="/admin/frontpage/edit_picks" method="POST">
       <% books.forEach((book, index) => { %>
