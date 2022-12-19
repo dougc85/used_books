@@ -24,7 +24,6 @@ exports.getEditPicksFront = (req, res, next) => {
 }
 
 exports.postEditPicksFront = (req, res, next) => {
-  console.log(req.body);
 
   if (Object.keys(req.body).length === 4) {
     FrontPage.findOne()
@@ -70,5 +69,12 @@ exports.getEditAuthorFront = (req, res, next) => {
 }
 
 exports.postEditAuthorFront = (req, res, next) => {
-
+  FrontPage.findOne()
+    .then((frontPage) => {
+      frontPage.featuredAuthor = req.body.featuredAuthor;
+      return frontPage.save();
+    })
+    .then(() => {
+      res.redirect('/admin/frontpage');
+    })
 }
