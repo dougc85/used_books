@@ -2,10 +2,6 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-function arrayLength(val) {
-  return val.length === 4;
-}
-
 const frontPageSchema = new Schema({
   featuredAuthor: {
     type: Schema.Types.ObjectId,
@@ -14,9 +10,7 @@ const frontPageSchema = new Schema({
   },
   suggestedBooks: [{
     type: Schema.Types.ObjectId,
-    required: true,
     ref: 'Book',
-    validate: [arrayLength, 'Array must have 4 items']
   }]
 })
 

@@ -7,11 +7,18 @@
   <%- include('../includes/header.ejs') %>
   <main>
     <%- include('../includes/backButton.ejs') %>
-    <h2>Choose Featured Books</h2>
-    <form action="/admin/frontpage" method="POST">
+    <h2>
+      Choose Featured Books
+      <span>Select Any Number (4 is suggested)</span>
+    </h2>
+    <form action="/admin/frontpage/edit_picks" method="POST">
       <% books.forEach((book, index) => { %>
       <div class="featured-book-option">
-        <input type="checkbox" id="<%= book.title + '-featured-book' %>" name="<%= 'featured-book-' + index %>" value="<%= book._id %>">
+        <input type="checkbox" id="<%= book.title + '-featured-book' %>" name="<%= 'featured-book-' + index %>" value="<%= book._id %>" <%-
+          (oldPicks.some(oldPick => {
+            return oldPick.equals(book._id);
+          })) ? 'checked' : null;
+          %>>
         <label for="<%= book.title + '-featured-book' %>">
           <img src="<%= book.imageURL %>" alt="<%= book.title %>">
           <span>

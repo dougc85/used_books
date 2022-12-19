@@ -7,6 +7,13 @@ main {
 
 h2 {
   padding-bottom: 2rem;
+  text-align: center;
+}
+
+h2 span {
+  font-size: 2rem;
+  display: block;
+  margin-top: 1rem;
 }
 
 form {}
