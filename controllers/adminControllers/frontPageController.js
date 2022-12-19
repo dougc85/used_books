@@ -54,6 +54,18 @@ exports.postEditPicksFront = (req, res, next) => {
 }
 
 exports.getEditAuthorFront = (req, res, next) => {
+  const frontPromise = FrontPage.findOne().exec();
+
+  const authorPromise =
+    Author
+      .find()
+      .select('firstname lastname birthyear deathyear')
+      .sort({ "lastname": 1 })
+      .exec();
+
+  Promise.all([frontPromise, authorPromise]).then(([frontPage, authors]) => {
+    res.render('admin/pickAuthor', { authors, backText: 'Front Page Admin', backHref: '/admin/frontpage', oldAuthor: frontPage.featuredAuthor });
+  });
 
 }
 
