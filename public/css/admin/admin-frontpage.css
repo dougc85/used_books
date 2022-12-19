@@ -58,3 +58,15 @@ main p {
 .frontpage-picks img {
   height: 200px;
 }
+
+.featured-author-figure {
+  margin-bottom: 20px;
+}
+
+.featured-author-figure img {
+  height: 200px;
+}
+
+.featured-author-figure figcaption {
+  font-size: 1.6rem;
+}

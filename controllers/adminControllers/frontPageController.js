@@ -3,8 +3,9 @@ const FrontPage = require('../../models/frontPage');
 const Author = require('../../models/author');
 
 exports.getFrontPage = (req, res, next) => {
-  FrontPage.findOne().populate("suggestedBooks").then(frontPage => {
-    res.render('admin/frontPageAdmin', { backText: 'Admin', backHref: '/admin', suggestedBooks: frontPage.suggestedBooks });
+  FrontPage.findOne().populate("suggestedBooks").populate("featuredAuthor").then(({ suggestedBooks, featuredAuthor }) => {
+    console.log(featuredAuthor, 'author');
+    res.render('admin/frontPageAdmin', { backText: 'Admin', backHref: '/admin', suggestedBooks, featuredAuthor });
   })
 }
 

@@ -68,7 +68,6 @@ exports.getCatalogueBookPage = (req, res, next) => {
     .populate('author', 'firstname lastname')
     .populate('genre')
     .then((book) => {
-      console.log(book, 'book');
       res.render('admin/catalogueBook', { book, backText: 'Catalogue', backHref: '/admin/book_catalogue' });
     })
 }

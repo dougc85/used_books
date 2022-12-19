@@ -24,7 +24,10 @@
       <h3>
         Current Featured Author
       </h3>
-      <p>Show Author</p>
+      <figure class="featured-author-figure">
+        <img src="<%= featuredAuthor.imageURL %>">
+        <figcaption><%= featuredAuthor.firstname + " " + featuredAuthor.lastname %></figcaption>
+      </figure>
       <a href="/admin/frontpage/edit_author">Choose Different Featured Author</a>
     </section>
   </main>
