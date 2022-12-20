@@ -8,6 +8,10 @@
 <body>
   <%- include('../includes/header.ejs') %>
   <%- include('../includes/shopHeader.ejs') %>
+
+  <%
+    const {imageURL, firstname, lastname, birthyear, deathyear, biography, books} = frontPage.featuredAuthor;
+  %>
   <main>
     <section class="welcome">
       <h2>Welcome to Doug's Books!</h2>
@@ -17,9 +21,29 @@
         <span>Have a look around; we hope you find something good to read!</span>
       </p>
     </section>
-    <section>
+    <section class="author-section">
       <h3>This Month's Featured Author</h3>
-      <p><%= frontPage.featuredAuthor.firstname + " " + frontPage.featuredAuthor.lastname %></p>
+      <div class="author-content">
+        <img class="author-image" src="<%= imageURL %>" alt="<% firstname + ' ' + lastname %>">
+        <div class="author-facts">
+          <p class="author-name">
+            <%= firstname + " " + lastname %>
+            <span class="author-dates">
+              <%= birthyear + " - " + (deathyear ? deathyear : 'present') %>
+            </span>
+          </p>
+          <p class="author-biography">
+            <%= biography %>
+          </p>
+          <ul class="author-books">
+            <% for (let book of books) { %>
+            <li>
+              <img src="<%= book.imageURL %>" alt="<%= book.title %>">
+            </li>
+            <% } %>
+          </ul>
+        </div>
+      </div>
     </section>
     <section>
       <h3>Doug's Picks</h3>
