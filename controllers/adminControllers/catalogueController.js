@@ -50,11 +50,17 @@ exports.postAddBookToCatalogue = (req, res, next) => {
 
   book.save()
     .then((book) => {
-      return Author.findOneAndUpdate({ _id: author }, {
+      const authorPromise = Author.findOneAndUpdate({ _id: author }, {
         $push: {
           "books": book._id,
         }
       })
+      const genrePromise = Genre.findOneAndUpdate({ _id: genre }, {
+        $push: {
+          "books": book._id,
+        }
+      })
+      return Promise.all(authorPromise, genrePromise);
     })
     .then(() => {
       res.redirect("/admin/book_catalogue");
@@ -103,17 +109,64 @@ exports.postEditCatalogueBookPage = (req, res, next) => {
     bookId
   } = req.body;
 
-  Book.findOneAndUpdate({ _id: bookId }, {
-    title: title.trim(),
-    imageURL: imageURL.trim(),
-    author,
-    genre,
-    description: description.trim(),
+  Book.findOne({ _id: bookId }).then(oldBook => {
+
+    const promises = [];
+
+    const bookPromise = Book.findOneAndUpdate({ _id: bookId }, {
+      title: title.trim(),
+      imageURL: imageURL.trim(),
+      author,
+      genre,
+      description: description.trim(),
+    })
+
+    promises.push(bookPromise);
+
+    if (!author.equals(oldBook.author)) {
+      const authorPromise = Author.findOneAndUpdate({ _id: author }, {
+        $addToSet: {
+          "books": bookId,
+        }
+      });
+
+      promises.push(authorPromise);
+
+      const oldAuthorPromise = Author.findOneAndUpdate({ _id: oldBook.author }, {
+        $pull: {
+          "books": bookId,
+        }
+      })
+
+      promises.push(oldAuthorPromise);
+    }
+
+    if (!genre.equals(oldBook.genre)) {
+      const genrePromise = Genre.findOneAndUpdate({ _id: genre }, {
+        $addToSet: {
+          "books": bookId,
+        }
+      });
+
+      promises.push(genrePromise);
+
+      const oldGenrePromise = Genre.findOneAndUpdate({ _id: oldBook.genre }, {
+        $pull: {
+          "books": bookId,
+        }
+      })
+
+      promises.push(oldGenrePromise);
+    }
+
+    Promise.all(promises)
+      .then((result) => {
+        res.redirect("/admin/book_catalogue/" + bookId);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   })
-    .then((result) => {
-      res.redirect("/admin/book_catalogue/" + bookId);
-    })
-    .catch((err) => {
-      console.log(err);
-    })
+
+
 }
