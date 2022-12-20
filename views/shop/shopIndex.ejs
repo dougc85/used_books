@@ -9,18 +9,20 @@
   <%- include('../includes/header.ejs') %>
   <%- include('../includes/shopHeader.ejs') %>
   <main>
-    <section>
+    <section class="welcome">
       <h2>Welcome to Doug's Books!</h2>
+      <img src="https://www.frommers.com/system/media_items/attachments/000/865/497/s980/Powells_again.jpg?1587431076" alt="bookshelves in a store">
       <p>
         We are located at 2152 45th St, Long Beach, CA.
         <span>Have a look around; we hope you find something good to read!</span>
       </p>
     </section>
     <section>
-      <h3>Doug's Picks</h3>
+      <h3>This Month's Featured Author</h3>
+      <p><%= frontPage.featuredAuthor.firstname + " " + frontPage.featuredAuthor.lastname %></p>
     </section>
     <section>
-      <h3>This Month's Featured Author</h3>
+      <h3>Doug's Picks</h3>
     </section>
   </main>
   <footer>
