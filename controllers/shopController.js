@@ -1,6 +1,7 @@
 const FrontPage = require('../models/frontPage');
 const Book = require('../models/book');
-const book = require('../models/book');
+const Author = require('../models/author');
+const Genre = require('../models/genre');
 
 exports.getIndex = (req, res, next) => {
   const frontPagePromise =
@@ -40,5 +41,23 @@ exports.getShopByTitle = (req, res, next) => {
       }
       res.render('shop/shopByTitle', { books: booksWithCopies });
     })
-
 }
+
+exports.getShopByAuthor = (req, res, next) => {
+  Author
+    .find()
+    .select('firstname lastname')
+    .sort({ "lastname": 1, "firstname": 1, "birthyear": 1 })
+    .then((authors) => {
+      res.render('shop/shopByAuthor', { authors });
+    })
+};
+
+exports.getShopByGenre = (req, res, next) => {
+  Genre
+    .find()
+    .sort({ "genre": 1 })
+    .then((genres) => {
+      res.render('shop/shopByGenre', { genres });
+    })
+};

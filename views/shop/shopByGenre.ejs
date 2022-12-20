@@ -1,6 +1,6 @@
 <%- include('../includes/head.ejs') %>
 <link rel="stylesheet" href="/css/includes/shop-header.css">
-<link rel="stylesheet" href="/css/shop/shop-by-title.css">
+<link rel="stylesheet" href="/css/shop/shop-by-genre.css">
 
 </head>
 
@@ -9,13 +9,13 @@
   <%- include('../includes/shopHeader.ejs') %>
   <main>
     <h2>
-      Shop By Title:
+      Shop By Genre:
     </h2>
     <ul>
-      <% for (let book of books) { %>
+      <% for (let genre of genres) { %>
       <li>
-        <a href="/shop/title/<%= book._id%>">
-          <%= book.title %>
+        <a href="/shop/genre/<%= genre._id%>">
+          <%= genre.genre %>
         </a>
       </li>
       <% } %>

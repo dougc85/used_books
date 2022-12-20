@@ -1,6 +1,7 @@
 const Author = require('../../models/author');
 
 exports.getAuthors = (req, res, next) => {
+
   Author
     .find()
     .select('firstname lastname')

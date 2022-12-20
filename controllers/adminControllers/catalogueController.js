@@ -2,7 +2,8 @@ const Book = require('../../models/book');
 const Genre = require('../../models/genre');
 const Author = require('../../models/author');
 
-exports.getBookCatalogue = (req, res, next) => {
+exports.getBookCatalogue = async function (req, res, next) {
+
   Book
     .find()
     .select('title')

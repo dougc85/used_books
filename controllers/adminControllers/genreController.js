@@ -17,7 +17,8 @@ exports.getAddGenre = (req, res, next) => {
 exports.postAddGenre = (req, res, next) => {
 
   const genre = new Genre({
-    genre: req.body.genre.trim()
+    genre: req.body.genre.trim(),
+    books: [],
   })
   genre.save()
     .then(() => {
