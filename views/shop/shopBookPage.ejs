@@ -1,0 +1,51 @@
+<%- include('../includes/head.ejs')%>
+<link rel="stylesheet" href="/css/includes/shop-header.css">
+<link rel="stylesheet" href="/css/shop/shop-book-page.css">
+</head>
+
+<body>
+  <%- include('../includes/header.ejs') %>
+  <%- include('../includes/shopHeader.ejs') %>
+  <main>
+    <section>
+      <h2 class="book-title"><%= book.title %></h2>
+      <p class="book-author book-info">
+        by <%= book.author.firstname ? book.author.firstname + " " + book.author.lastname : book.author.lastname %>
+      </p>
+      <img class="book-image" src="<%= book.imageURL ? book.imageURL : 'https://www.daysoftheyear.com/cdn-cgi/image/dpr=1%2Cf=auto%2Cfit=cover%2Cheight=675%2Cmetadata=none%2Conerror=redirect%2Cq=85%2Cwidth=1200/wp-content/uploads/world-book-day-scaled.jpg' %>" alt="<%= book.imageURL ? book.title : 'imageURL not provided' %> ">
+      <p class="book-description book-info">
+        <%= book.description %>
+      </p>
+      <p class="book-genre book-info">
+        Genre: <%= book.genre.genre %>
+      </p>
+    </section>
+    <hr>
+    <section class="inventory-section">
+      <h2 class="inventory-book-heading">Copies for sale:</h2>
+      <ul class="inventory-copies">
+        <% for (let copy of book.copies) { %>
+        <li class="inventory-copy">
+          <a href="<%= '/admin/inventory/' + book._id + '/' + copy._id %>"><img class="copy-image" src="<%= copy.imageURL %>" alt="Cover of <%= copy.yearPublished %> edition"></a>
+          <div class="copy-info">
+            <p class="copy-price"> - $<%= copy.price %></p>
+            <p class="copy-condition"><%= copy.condition %></p>
+            <p class="copy-year-published"><%= copy.yearPublished %></p>
+            <% if (copy.translator) { %>
+            <p class="copy-translator"><%= copy.translator %></p>
+            <% } %>
+            <% if (copy.editor) { %>
+            <p class="copy-editor"><%= copy.editor %></p>
+            <% } %>
+            <% if (copy.edition) { %>
+            <p class="copy-edition"><%= copy.edition %></p>
+            <% } %>
+          </div>
+        </li>
+        <% }%>
+      </ul>
+    </section>
+  </main>
+</body>
+
+</html>

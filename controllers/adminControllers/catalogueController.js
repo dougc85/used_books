@@ -123,7 +123,7 @@ exports.postEditCatalogueBookPage = (req, res, next) => {
 
     promises.push(bookPromise);
 
-    if (!author.equals(oldBook.author)) {
+    if (author !== oldBook.author.toString()) {
       const authorPromise = Author.findOneAndUpdate({ _id: author }, {
         $addToSet: {
           "books": bookId,
@@ -141,7 +141,7 @@ exports.postEditCatalogueBookPage = (req, res, next) => {
       promises.push(oldAuthorPromise);
     }
 
-    if (!genre.equals(oldBook.genre)) {
+    if (genre !== oldBook.genre.toString()) {
       const genrePromise = Genre.findOneAndUpdate({ _id: genre }, {
         $addToSet: {
           "books": bookId,

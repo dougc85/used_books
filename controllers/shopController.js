@@ -43,6 +43,16 @@ exports.getShopByTitle = (req, res, next) => {
     })
 }
 
+exports.getShopBookPage = (req, res, next) => {
+  Book.findById(req.params.bookId)
+    .populate('author', 'firstname lastname')
+    .populate('genre')
+    .populate('copies')
+    .then((book) => {
+      res.render('shop/shopBookPage', { book });
+    })
+}
+
 exports.getShopByAuthor = (req, res, next) => {
   Author
     .find()
@@ -53,11 +63,36 @@ exports.getShopByAuthor = (req, res, next) => {
     })
 };
 
+exports.getShopByOneAuthor = (req, res, next) => {
+  Author
+    .findOne({ _id: req.params.authorId })
+    .populate("books", "title")
+    .then(author => {
+      res.render('shop/shopByOneAuthor', { author });
+    })
+};
+
 exports.getShopByGenre = (req, res, next) => {
   Genre
     .find()
     .sort({ "genre": 1 })
     .then((genres) => {
-      res.render('shop/shopByGenre', { genres });
+      const genresWithBooks = [];
+      for (let genre of genres) {
+        if (genre.books.length !== 0) {
+          genresWithBooks.push(genre);
+        }
+      }
+
+      res.render('shop/shopByGenre', { genres: genresWithBooks });
+    })
+};
+
+exports.getShopByOneGenre = (req, res, next) => {
+  Genre
+    .findOne({ _id: req.params.genreId })
+    .populate("books", "title")
+    .then(genre => {
+      res.render('shop/shopByOneGenre', { genre });
     })
 };

@@ -1,0 +1,85 @@
+main {
+  background-color: rgb(255, 234, 217);
+  padding: 2rem 8rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.book-title {
+  margin-bottom: .5rem;
+}
+
+.book-info {
+  font-size: 2rem;
+}
+
+.book-author {
+  margin-bottom: 1.5rem;
+}
+
+.book-image {
+  height: 200px;
+  margin-bottom: 2.5rem;
+}
+
+.book-description {
+  max-width: 900px;
+  margin: 0 auto;
+  margin-bottom: 1.5rem;
+}
+
+.book-genre {
+  margin-bottom: 2rem;
+}
+
+.book-edit-link {
+  padding: .5rem;
+  font-size: 1.6rem;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+
+
+.inventory-section {
+  align-self: flex-start;
+}
+
+.inventory-book-heading {
+  margin-bottom: 4rem;
+}
+
+hr {
+  align-self: stretch;
+  margin: 3rem 300px;
+  height: .5px;
+  background-color: black;
+  border: none;
+}
+
+.inventory-copies {
+  padding-top: 2rem;
+  margin-left: 4rem;
+}
+
+.inventory-copy {
+  display: flex;
+  align-items: center;
+  font-size: 1.6rem;
+  margin-bottom: 2rem;
+}
+
+.copy-info {
+  display: flex;
+  margin-left: 1rem;
+}
+
+.copy-info p {
+  margin-right: 1rem;
+}
+
+.copy-image {
+  height: 70px;
+}
