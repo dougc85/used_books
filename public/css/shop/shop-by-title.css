@@ -1,0 +1,25 @@
+main {
+  background-color: rgb(255, 234, 217);
+  height: calc(100vh - 175px);
+  padding: 2rem 4rem;
+
+}
+
+h2 {
+  font-size: 5rem;
+  margin-bottom: 1rem;
+}
+
+main ul {
+  list-style-type: none;
+  padding: 2rem;
+}
+
+main li {
+  font-size: 1.6rem;
+  margin-bottom: 5px;
+}
+
+main a:hover {
+  border-bottom: 1px solid black;
+}

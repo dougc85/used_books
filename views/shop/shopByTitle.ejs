@@ -1,0 +1,29 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/includes/shop-header.css">
+<link rel="stylesheet" href="/css/shop/shop-by-title.css">
+
+</head>
+
+<body>
+  <%- include('../includes/header.ejs') %>
+  <%- include('../includes/shopHeader.ejs') %>
+  <main>
+    <h2>
+      Titles in stock:
+    </h2>
+    <ul>
+      <% for (let book of books) { %>
+      <li>
+        <a href="/shop/title/<%= book._id%>">
+          <%= book.title %>
+        </a>
+      </li>
+      <% } %>
+    </ul>
+  </main>
+  <footer>
+
+  </footer>
+</body>
+
+</html>

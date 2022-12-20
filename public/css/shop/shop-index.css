@@ -92,3 +92,48 @@ section {
 h3 {
   margin-bottom: 20px;
 }
+
+.book-container {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 4rem;
+}
+
+.book-content {
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.book-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.book-author {
+  font-size: 2rem;
+  font-weight: normal;
+}
+
+.book-description {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+}
+
+.book-genre {
+  font-weight: bold;
+  font-size: 1.4rem;
+  font-style: italic;
+}
+
+.book-image-container {}
+
+.book-image-container img {
+  height: 450px;
+}
+
+.right-book {}
+
+.left-book {}

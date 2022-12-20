@@ -1,19 +1,44 @@
 const FrontPage = require('../models/frontPage');
+const Book = require('../models/book');
+const book = require('../models/book');
 
 exports.getIndex = (req, res, next) => {
   const frontPagePromise =
     FrontPage
       .findOne()
-      .populate('suggestedBooks')
+      .populate({
+        path: 'suggestedBooks',
+        populate: [{
+          path: 'genre',
+        },
+        {
+          path: 'author',
+        }]
+      })
       .populate({
         path: 'featuredAuthor',
-        // Get friends of friends - populate the 'friends' array for every friend
         populate: { path: 'books' }
       })
       .exec();
 
   Promise.all([frontPagePromise]).then(([frontPage]) => {
-    console.log(frontPage);
     res.render('shop/shopIndex', { frontPage });
   })
+}
+
+exports.getShopByTitle = (req, res, next) => {
+  Book
+    .find()
+    .select('title copies')
+    .sort({ "title": 1 })
+    .then((books) => {
+      const booksWithCopies = [];
+      for (let book of books) {
+        if (book.copies.length !== 0) {
+          booksWithCopies.push(book);
+        }
+      }
+      res.render('shop/shopByTitle', { books: booksWithCopies });
+    })
+
 }
