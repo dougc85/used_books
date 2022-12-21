@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 
 const cartSchema = new Schema({
   user: {
-    type: String,
+    type: Schema.Types.ObjectId,
+    ref: 'User'
   },
   copies: [{
     type: Schema.Types.ObjectId,
