@@ -134,6 +134,9 @@ h3 {
   height: 450px;
 }
 
-.right-book {}
-
-.left-book {}
+.book-container a {
+  font-size: 1.6rem;
+  border-bottom: 1px solid black;
+  align-self: flex-start;
+  margin-top: 10px;
+}

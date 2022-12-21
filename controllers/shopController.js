@@ -66,7 +66,7 @@ exports.getShopByAuthor = (req, res, next) => {
 exports.getShopByOneAuthor = (req, res, next) => {
   Author
     .findOne({ _id: req.params.authorId })
-    .populate("books", "title")
+    .populate("books", "title imageURL")
     .then(author => {
       res.render('shop/shopByOneAuthor', { author });
     })

@@ -1,25 +1,78 @@
 main {
   background-color: rgb(255, 234, 217);
-  height: calc(100vh - 175px);
   padding: 2rem 4rem;
-
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-h2 {
-  font-size: 5rem;
-  margin-bottom: 1rem;
+.author-info {
+  font-size: 2rem;
 }
 
-main ul {
-  list-style-type: none;
-  padding: 2rem;
+.author-dates {
+  margin-bottom: 2.5rem;
 }
 
-main li {
+.author-bio {
+  max-width: 900px;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+}
+
+.author-image {
+  height: 200px;
+  margin-bottom: 2.5rem;
+}
+
+.author-books {
+  margin-bottom: 2rem;
+}
+
+.author-books-heading {
+  margin-bottom: 1.5rem;
+}
+
+.author-books-list {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  max-width: 800px;
+  list-style: none;
+  flex-wrap: wrap;
+}
+
+.author-books-list li:not(:last-child) {
+  margin-right: 40px;
+}
+
+.author-book-link {
+  display: flex;
+  flex-direction: column;
+}
+
+.author-book-image {
+  width: 120px;
+  display: block;
+  margin: 0 auto;
+}
+
+.author-book-title {
+  margin: 0 auto;
   font-size: 1.6rem;
-  margin-bottom: 5px;
+  max-width: 120px;
+  display: block;
+  margin-top: 1rem;
 }
 
-main a:hover {
+.author-edit-link {
+  padding: .5rem;
+  font-size: 1.6rem;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.author-book-link:hover span {
   border-bottom: 1px solid black;
 }

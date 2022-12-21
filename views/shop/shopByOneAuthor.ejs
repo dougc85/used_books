@@ -8,18 +8,31 @@
   <%- include('../includes/header.ejs') %>
   <%- include('../includes/shopHeader.ejs') %>
   <main>
-    <h2>
-      Shop By <%= author.firstname + " " + author.lastname %>:
-    </h2>
-    <ul>
-      <% for (let book of author.books) { %>
-      <li>
-        <a href="/shop/title/<%= book._id%>">
-          <%= book.title %>
-        </a>
-      </li>
-      <% } %>
-    </ul>
+    <% const authorName = author.firstname ? author.firstname + " " + author.lastname : author.lastname; %>
+    <h2><%= authorName %></h2>
+
+    <p class="author-dates author-info">
+      <%= author.birthyear + "-" + (author.deathyear ? author.deathyear : "present") %>
+    </p>
+
+    <img class="author-image" src="<%= author.imageURL ? author.imageURL : 'https://pixy.org/src/92/929092.jpg' %>" alt="<%= author.imageURL ? authorName : 'imageURL not provided' %> ">
+    <p class="author-bio author-info">
+      <%= author.biography %>
+    </p>
+    <div class="author-books">
+      <h3 class="author-books-heading">Books for sale:</h3>
+      <ul class="author-books-list">
+        <% for (let book of author.books) { %>
+        <li>
+          <a class="author-book-link" href="/shop/title/<%= book._id %>">
+            <img class="author-book-image" src="<%= book.imageURL %>" alt="<%= book.title %> ">
+            <span class="author-book-title"><%= book.title %></span>
+          </a>
+
+        </li>
+        <% } %>
+      </ul>
+    </div>
   </main>
   <footer>
 
