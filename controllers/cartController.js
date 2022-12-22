@@ -44,3 +44,24 @@ exports.getAddToCart = (req, res, next) => {
     res.redirect('/cart');
   })
 }
+
+exports.getRemoveFromCart = (req, res, next) => {
+
+  const bookId = req.query.bookId;
+
+  const userPromise = User.findByIdAndUpdate(userId, {
+    $pull: {
+      "cart": req.query.copyId,
+    }
+  })
+
+  const bookPromise = Book.findByIdAndUpdate(bookId, {
+    $push: {
+      "copies": req.query.copyId,
+    }
+  });
+
+  Promise.all([userPromise, bookPromise]).then(() => {
+    res.redirect('/cart');
+  })
+}

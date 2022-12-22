@@ -42,7 +42,7 @@
             <% if (copy.edition) { %>
             <p class="copy-edition"><%= copy.edition %></p>
             <% } %>
-            <a href=""">Remove From Cart</a>
+            <a href="/cart/removefromcart?copyId=<%= copy._id %>&bookId=<%= copy.book._id %>">Remove From Cart</a>
           </div>
         </div>
         <p class=" copy-price">$<%= copy.price %></p>
