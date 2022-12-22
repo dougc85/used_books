@@ -8,6 +8,7 @@ const getIndex = require('./controllers/indexController');
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 const cartRoutes = require('./routes/cart');
+const ordersRoutes = require('./routes/orders');
 
 const app = express();
 const mongoDB = secrets.mongoURI;
@@ -22,6 +23,7 @@ app.get("/", getIndex);
 app.use("/admin", adminRoutes);
 app.use("/shop", shopRoutes);
 app.use("/cart", cartRoutes);
+app.use("/orders", ordersRoutes);
 app.use("/", get404);
 
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true })

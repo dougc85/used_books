@@ -53,6 +53,17 @@
         <span class="cart-total-price">$<%= cartTotal %></span>
       </li>
     </ul>
+    <form action="/cart/placeorder" method="POST">
+      <% 
+      let idx = 0;
+      for (let copy of user.cart) {  %>
+      <input type="hidden" value="<%= copy._id %>" name="copy<%= idx %>">
+      <% 
+      idx++;
+      } %>
+      <input type="hidden" value=" <%= cartTotal %>" name="total">
+      <button>Place Order</button>
+    </form>
   </main>
   <footer>
 
