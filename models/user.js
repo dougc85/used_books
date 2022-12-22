@@ -7,10 +7,10 @@ const userSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Order',
   }],
-  cart: {
+  cart: [{
     type: Schema.Types.ObjectId,
-    ref: 'Cart'
-  },
+    ref: 'BookInStock'
+  }],
 });
 
 module.exports = mongoose.model('User', userSchema);

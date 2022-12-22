@@ -1,0 +1,93 @@
+main {
+  background-color: rgb(255, 234, 217);
+  min-height: calc(100vh - 175px);
+  padding: 2rem;
+}
+
+.cart-book-heading {
+  margin-bottom: 4rem;
+  text-align: start;
+}
+
+hr {
+  align-self: stretch;
+  margin: 3rem 300px;
+  height: .5px;
+  background-color: black;
+  border: none;
+}
+
+.cart-copies {
+  padding: 2rem 150px;
+  margin-left: 4rem;
+}
+
+.cart-copy {
+  display: flex;
+  align-items: center;
+  font-size: 1.6rem;
+  padding: 2rem 0;
+  border-bottom: .5px solid rgb(129, 129, 129);
+}
+
+.cart-copy:first-child {
+  border-top: .5px solid rgb(129, 129, 129);
+}
+
+.copy-info {
+  margin-left: 3rem;
+}
+
+.book-details {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 5px;
+}
+
+.book-title {
+  font-weight: bold;
+  font-size: 2rem;
+  margin-right: 1rem;
+}
+
+.author-name {}
+
+.copy-details {
+  display: flex;
+  align-items: center;
+}
+
+.copy-details p {
+  margin-right: 1rem;
+}
+
+.copy-details a {
+  border: 1px solid black;
+  background-color: white;
+  padding: 3px 4px;
+  border-radius: 4px;
+}
+
+.copy-price {
+  margin-left: auto;
+  margin-right: 15px;
+}
+
+.copy-image {
+  height: 70px;
+}
+
+.cart-total {
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+  padding: 2rem 0;
+  border-bottom: .5px solid rgb(129, 129, 129);
+  font-weight: bold;
+}
+
+.cart-total-price {
+  display: block;
+  margin-left: auto;
+  margin-right: 15px;
+}

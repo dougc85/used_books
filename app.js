@@ -21,7 +21,7 @@ app.use(express.static("public"));
 app.get("/", getIndex);
 app.use("/admin", adminRoutes);
 app.use("/shop", shopRoutes);
-app.use("/shoppingcart", cartRoutes);
+app.use("/cart", cartRoutes);
 app.use("/", get404);
 
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true })

@@ -1,0 +1,62 @@
+<%- include('./includes/head.ejs') %>
+<link rel="stylesheet" href="/css/includes/shop-header.css">
+<link rel="stylesheet" href="/css/cart.css">
+
+</head>
+
+<body>
+  <%- include('./includes/header.ejs') %>
+  <%- include('./includes/shopHeader.ejs') %>
+
+  <main>
+    <h2>Your Shopping Cart: </h2>
+    <ul class="cart-copies">
+      <% 
+        let cartTotal = 0;
+        for (let copy of user.cart) { 
+        cartTotal += copy.price;
+        const {author} = copy.book;
+        const authorName = author.firstname ? author.firstname + " " + author.lastname : author.lastname;
+        %>
+
+      <li class="cart-copy">
+        <img class="copy-image" src="<%= copy.imageURL %>" alt="Cover of <%= copy.yearPublished %> edition">
+        <div class="copy-info">
+          <div class="book-details">
+            <p class="book-title">
+              <%= copy.book.title%>
+            </p>
+            <p class="author-name">
+              <%= authorName %>
+            </p>
+          </div>
+          <div class="copy-details">
+            <p class="copy-condition"><%= copy.condition %></p>
+            <p class="copy-year-published"><%= copy.yearPublished %></p>
+            <% if (copy.translator) { %>
+            <p class="copy-translator"><%= copy.translator %></p>
+            <% } %>
+            <% if (copy.editor) { %>
+            <p class="copy-editor"><%= copy.editor %></p>
+            <% } %>
+            <% if (copy.edition) { %>
+            <p class="copy-edition"><%= copy.edition %></p>
+            <% } %>
+            <a href=""">Remove From Cart</a>
+          </div>
+        </div>
+        <p class=" copy-price">$<%= copy.price %></p>
+      </li>
+      <% }%>
+      <li class="cart-total">
+        Total
+        <span class="cart-total-price">$<%= cartTotal %></span>
+      </li>
+    </ul>
+  </main>
+  <footer>
+
+  </footer>
+</body>
+
+</html>
