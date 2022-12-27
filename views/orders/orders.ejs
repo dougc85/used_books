@@ -9,8 +9,30 @@
 
   <main>
     <h2>Your Orders: </h2>
-    <ul class="cart-copies">
-
+    <hr>
+    <ul class="orders">
+      <% for (let idx = 0; idx < orders.length; idx++) {
+        let order = orders[orders.length - 1 - idx];
+        %>
+      <li class="order">
+        <div class="order-metadata">
+          <p class="order-date"><%= order.date.toUTCString() %></p>
+          <p class="order-total">$<%= order.total %></p>
+          <a href="/orders/<%= order.order._id %>">See Details</a>
+        </div>
+        <div>
+          <ul class="purchased-books">
+            <% for (let book of order.order.purchasedBooks) {%>
+            <li class="purchased-book">
+              <img src="<%= book.imageURL %>" alt="<%= book.title %>">
+              <p><%= book.book.title %></p>
+            </li>
+            <% } %>
+          </ul>
+        </div>
+      </li>
+      <hr>
+      <% } %>
     </ul>
   </main>
   <footer>

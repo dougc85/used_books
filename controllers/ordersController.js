@@ -14,11 +14,14 @@ exports.getOrders = (req, res, next) => {
         path: 'order',
         populate: {
           path: 'purchasedBooks',
+          populate: {
+            path: 'book',
+            select: 'title'
+          }
         }
       }
     })
     .then((user) => {
-      console.log(user.orders[2].order.purchasedBooks);
-      res.render('orders/orders')
+      res.render('orders/orders', { orders: user.orders })
     })
 }
