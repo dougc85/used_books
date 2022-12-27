@@ -91,3 +91,14 @@ hr {
   margin-left: auto;
   margin-right: 15px;
 }
+
+main button {
+  display: block;
+  margin: 1rem auto;
+  background-color: white;
+  border: 1px solid black;
+  padding: 8px;
+  border-radius: 5px;
+  font-size: 2rem;
+  cursor: pointer;
+}
