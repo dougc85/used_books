@@ -1,7 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const compression = require("compression");
-const secrets = require('./secrets');
+const helmet = require("helmet");
+// const secrets = require('./secrets');
 
 const get404 = require('./controllers/404Controller');
 const getIndex = require('./controllers/indexController');
@@ -12,8 +13,9 @@ const cartRoutes = require('./routes/cart');
 const ordersRoutes = require('./routes/orders');
 
 const app = express();
-const mongoDB = secrets.mongoURI;
+const mongoDB = process.env.MONGODB_URI
 
+app.use(helmet());
 app.use(compression());
 
 app.set('view engine', 'ejs');

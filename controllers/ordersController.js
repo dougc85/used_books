@@ -1,6 +1,8 @@
-const {
-  userId,
-} = require('../secrets');
+// const {
+//   userId,
+// } = require('../secrets');
+
+const userID = process.env.USER_ID;
 
 const User = require('../models/user');
 const Order = require('../models/order');
