@@ -2,8 +2,7 @@
 //   userId,
 // } = require('../secrets');
 
-console.log(process.env, "environment variables");
-const userID = process.env.USER_ID;
+const userId = process.env.USER_ID;
 
 const User = require('../models/user');
 const Order = require('../models/order');
