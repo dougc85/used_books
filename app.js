@@ -13,9 +13,19 @@ const cartRoutes = require('./routes/cart');
 const ordersRoutes = require('./routes/orders');
 
 const app = express();
-const mongoDB = process.env.MONGODB_URI
+const mongoDB = process.env.MONGODB_URI;
+console.log(process.env, 'env variables');
+console.log(mongoDB, 'mongoDB');
 
 app.use(helmet());
+app.use(
+  helmet.contentSecurityPolicy({
+    useDefaults: true,
+    directives: {
+      "img-src": ["'self'", "https: data:"]
+    }
+  })
+)
 app.use(compression());
 
 app.set('view engine', 'ejs');
