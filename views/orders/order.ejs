@@ -1,0 +1,58 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/includes/shop-header.css">
+<link rel="stylesheet" href="/css/orders/order.css">
+
+</head>
+
+<body>
+  <%- include('../includes/header.ejs') %>
+
+  <main>
+    <h2>Order Placed On <%= order.date.toUTCString() %> </h2>
+    <ul class="order-copies">
+      <% 
+        for (let copy of order.purchasedBooks) { 
+        const {author, title} = copy.book;
+        const authorName = author.firstname ? author.firstname + " " + author.lastname : author.lastname;
+        %>
+
+      <li class="order-copy">
+        <img class="copy-image" src="<%= copy.imageURL %>" alt="Cover of <%= copy.yearPublished %> edition">
+        <div class="copy-info">
+          <div class="book-details">
+            <p class="book-title">
+              <%= title %>
+            </p>
+            <p class="author-name">
+              <%= authorName %>
+            </p>
+          </div>
+          <div class="copy-details">
+            <p class="copy-condition"><%= copy.condition %></p>
+            <p class="copy-year-published"><%= copy.yearPublished %></p>
+            <% if (copy.translator) { %>
+            <p class="copy-translator"><%= copy.translator %></p>
+            <% } %>
+            <% if (copy.editor) { %>
+            <p class="copy-editor"><%= copy.editor %></p>
+            <% } %>
+            <% if (copy.edition) { %>
+            <p class="copy-edition"><%= copy.edition %></p>
+            <% } %>
+          </div>
+        </div>
+        <p class=" copy-price">$<%= copy.price %></p>
+      </li>
+      <% }%>
+      <li class="order-total">
+        Total
+        <span class="order-total-price">$<%= order.total %></span>
+      </li>
+    </ul>
+  </main>
+  <footer>
+
+  </footer>
+</body>
+
+</html>
