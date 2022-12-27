@@ -1,7 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const compression = require("compression");
-const helmet = require("helmet");
 // const secrets = require('./secrets');
 
 const get404 = require('./controllers/404Controller');
@@ -15,16 +14,6 @@ const ordersRoutes = require('./routes/orders');
 const app = express();
 const mongoDB = process.env.MONGODB_URI;
 
-app.use(helmet());
-app.use(
-  helmet.contentSecurityPolicy({
-    useDefaults: true,
-    directives: {
-      "img-src": ["'self'", "https: data:"]
-    }
-  })
-)
-app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(compression());
 
 app.set('view engine', 'ejs');
