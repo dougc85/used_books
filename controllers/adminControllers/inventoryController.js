@@ -73,7 +73,6 @@ exports.getInventoryBook = (req, res, next) => {
   Book.findById(req.params.bookId)
     .populate('copies')
     .then((book) => {
-      console.log(book, 'book');
       res.render('admin/inventoryBook', { book, backText: 'Inventory', backHref: '/admin/inventory' });
     })
 }

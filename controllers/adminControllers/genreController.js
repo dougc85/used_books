@@ -40,8 +40,6 @@ exports.postEditGenre = (req, res, next) => {
 
   const { genre, genreId } = req.body;
 
-  console.log(genreId, 'genreId');
-
   Genre.findOneAndUpdate({ _id: genreId }, {
     genre: genre.trim(),
   })

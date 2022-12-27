@@ -37,8 +37,6 @@ exports.getOrder = (req, res, next) => {
       }
     })
     .then((order) => {
-      console.log(order);
-      console.log('order Book', order.purchasedBooks[0].book)
       res.render('orders/order', { order })
     })
 }
