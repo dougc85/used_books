@@ -35,7 +35,8 @@ app.use("/", get404);
 
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
-    app.listen(3000);
+    let port = process.env.PORT || '3000';
+    app.listen(port);
   })
   .catch((err) => {
     console.log('Cannot connect to DB');
