@@ -87,8 +87,6 @@ exports.getEditInventoryCopy = (req, res, next) => {
   const copyPromise = BookInStock
     .findById(req.params.copyId);
 
-  console.log(req.url.lastIndexOf('/'));
-
   const backURL = req.url.slice(0, req.url.lastIndexOf('/'));
 
   Promise.all([booksPromise, copyPromise])
