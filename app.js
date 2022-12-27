@@ -14,8 +14,6 @@ const ordersRoutes = require('./routes/orders');
 
 const app = express();
 const mongoDB = process.env.MONGODB_URI;
-console.log(process.env, 'env variables');
-console.log(mongoDB, 'mongoDB');
 
 app.use(helmet());
 app.use(
