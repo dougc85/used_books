@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const compression = require("compression");
 const secrets = require('./secrets');
 
 const get404 = require('./controllers/404Controller');
@@ -13,6 +14,8 @@ const ordersRoutes = require('./routes/orders');
 const app = express();
 const mongoDB = secrets.mongoURI;
 
+app.use(compression());
+
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
@@ -25,6 +28,8 @@ app.use("/shop", shopRoutes);
 app.use("/cart", cartRoutes);
 app.use("/orders", ordersRoutes);
 app.use("/", get404);
+
+
 
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
