@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const compression = require("compression");
+require('dotenv').config();
 // const secrets = require('./secrets');
 
 const get404 = require('./controllers/404Controller');
