@@ -1,0 +1,18 @@
+main {
+  background-color: rgb(255, 234, 217);
+  min-height: calc(100vh - 130px);
+  padding: 2rem;
+}
+
+h2 {
+  margin-bottom: 2rem;
+}
+
+hr {
+  width: 80%;
+  background-color: black;
+  border: none;
+  height: .5px;
+  margin: 2rem auto;
+
+}

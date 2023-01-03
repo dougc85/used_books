@@ -10,6 +10,8 @@
 .app-heading {
   font-size: 4rem;
   text-align: center;
+  user-select: none;
+  cursor: pointer;
 }
 
 .app-heading-first {
@@ -19,6 +21,7 @@
 
 .app-heading span {
   display: block;
+  color: white;
 }
 
 .app-nav {

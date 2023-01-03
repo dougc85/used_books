@@ -1,11 +1,19 @@
 <header class="app-header">
-  <h1 class="app-heading"><span class="app-heading-first">Doug's</span><span>Books</span></h1>
+  <h1 class="app-heading"><a href="/shop"><span class="app-heading-first">Doug's</span><span>Books</span></a></h1>
   <nav class="app-nav">
+    <% if (!currentUser) { %>
+    <ul>
+      <li><a href="/auth/login">Log In</a></li>
+      <li><a href="/auth/signup">Sign Up</a></li>
+    </ul>
+    <% } else { %>
     <ul>
       <li><a href="/shop">Shop</a></li>
       <li><a href="/orders">My Orders</a></li>
       <li><a href="/cart">Cart</a></li>
       <li><a href="/admin">Admin</a></li>
     </ul>
+    <% } %>
+
   </nav>
 </header>
