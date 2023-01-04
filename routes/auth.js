@@ -10,15 +10,13 @@ const {
   postSignup,
 } = require('../controllers/authController');
 
-const authenticate = () => passport.authenticate('local', { failureRedirect: '/auth/login' });
-
 const afterLogin = (err, req, res, next) => {
   if (err) next(err);
   res.redirect('/shop');
 };
 
 router.get("/login", getLogin);
-router.post("/login", postLogin);
+router.post("/login", passport.authenticate('local', { successRedirect: '/shop' }), postLogin);
 
 router.get("/signup", getSignup);
 router.post("/signup", postSignup);

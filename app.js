@@ -37,14 +37,14 @@ passport.use(new LocalStrategy(
     User.findOne({ email: username })
       .then((user) => {
         if (!user) {
-          return cb(null, false)
+          return cb(`There is no account associated with the email ${username}`, false)
         }
         bcrypt.compare(password, user.password)
           .then(passwordIsValid => {
             if (passwordIsValid) {
               return cb(null, user);
             } else {
-              return cb(null, false);
+              return cb('Invalid password', false);
             }
           })
       })
