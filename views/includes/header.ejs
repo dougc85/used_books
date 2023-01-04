@@ -10,7 +10,7 @@
     <ul>
       <li><a href="/shop">Shop</a></li>
 
-      <% if (currentUser.email !== "usedbooks.dougcarter@gmail.com") { %>
+      <% if (currentUser.email !== adminEmail) { %>
       <li><a href="/orders">My Orders</a></li>
       <li><a href="/cart">Cart</a></li>
       <% } else { %>

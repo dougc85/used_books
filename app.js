@@ -86,6 +86,7 @@ app.use(express.static("public"));
 
 app.use((req, res, next) => {
   res.locals.currentUser = req.user;
+  res.locals.adminEmail = process.env.EMAIL_ADDRESS;
   next();
 })
 
