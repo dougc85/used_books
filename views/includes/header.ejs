@@ -9,9 +9,19 @@
     <% } else { %>
     <ul>
       <li><a href="/shop">Shop</a></li>
+
+      <% if (currentUser.email !== "usedbooks.dougcarter@gmail.com") { %>
       <li><a href="/orders">My Orders</a></li>
       <li><a href="/cart">Cart</a></li>
+      <% } else { %>
       <li><a href="/admin">Admin</a></li>
+      <% } %>
+      <li>
+        <form action="/auth/logout" method="POST">
+          <input type="hidden" value="1" name="test">
+          <button>Log Out</button>
+        </form>
+      </li>
     </ul>
     <% } %>
 

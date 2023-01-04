@@ -45,3 +45,14 @@
 .app-nav ul a:hover {
   cursor: pointer;
 }
+
+header button {
+  display: block;
+  background-color: inherit;
+  border: none;
+  color: white;
+  font-size: 3rem;
+  margin: 0 auto;
+  font-family: Times, serif;
+  cursor: pointer;
+}

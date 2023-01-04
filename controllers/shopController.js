@@ -4,7 +4,6 @@ const Author = require('../models/author');
 const Genre = require('../models/genre');
 
 exports.getIndex = (req, res, next) => {
-  console.log(req.user, 'user');
   const frontPagePromise =
     FrontPage
       .findOne()
