@@ -8,6 +8,8 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const bcrypt = require('bcryptjs');
 const flash = require('connect-flash');
+const isAuth = require('./middleware/isAdmin');
+const isCustomer = require('./middleware/isCustomer');
 // const secrets = require('./secrets');
 
 const User = require('./models/user');
@@ -88,10 +90,10 @@ app.use((req, res, next) => {
 })
 
 app.get("/", getIndex);
-app.use("/admin", adminRoutes);
+app.use("/admin", isAuth, adminRoutes);
 app.use("/shop", shopRoutes);
-app.use("/cart", cartRoutes);
-app.use("/orders", ordersRoutes);
+app.use("/cart", isCustomer, cartRoutes);
+app.use("/orders", isCustomer, ordersRoutes);
 app.use("/auth", authRoutes);
 app.use("/", get404);
 
