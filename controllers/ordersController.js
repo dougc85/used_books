@@ -1,15 +1,9 @@
-// const {
-//   userId,
-// } = require('../secrets');
-
-const userId = process.env.USER_ID;
-
 const User = require('../models/user');
 const Order = require('../models/order');
 
 exports.getOrders = (req, res, next) => {
   User
-    .findOne({ _id: userId })
+    .findOne({ _id: req.user._id })
     .populate({
       path: 'orders',
       populate: {

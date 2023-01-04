@@ -1,9 +1,3 @@
-// const {
-//   userId,
-// } = require('../secrets');
-
-const userId = process.env.USER_ID;
-
 const User = require('../models/user');
 const Book = require('../models/book');
 const BookInStock = require('../models/bookInStock');
@@ -12,7 +6,7 @@ const Order = require('../models/order');
 
 exports.getCart = (req, res, next) => {
   User
-    .findById(userId)
+    .findById(req.user._id)
     .populate({
       path: 'cart',
       populate: [{
@@ -31,7 +25,7 @@ exports.getAddToCart = (req, res, next) => {
 
   const bookId = req.query.bookId;
 
-  const userPromise = User.findByIdAndUpdate(userId, {
+  const userPromise = User.findByIdAndUpdate(req.user._id, {
     $push: {
       "cart": req.query.copyId,
     }
@@ -52,7 +46,7 @@ exports.getRemoveFromCart = (req, res, next) => {
 
   const bookId = req.query.bookId;
 
-  const userPromise = User.findByIdAndUpdate(userId, {
+  const userPromise = User.findByIdAndUpdate(req.user._id, {
     $pull: {
       "cart": req.query.copyId,
     }
@@ -129,7 +123,7 @@ exports.postPlaceOrder = (req, res, next) => {
     const orderDate = new Date();
 
     const order = new Order({
-      user: userId,
+      user: req.user._id,
       date: orderDate,
       total: +req.body.total,
       purchasedBooks,
@@ -142,7 +136,7 @@ exports.postPlaceOrder = (req, res, next) => {
       .then((resultsArray) => {
         const order = resultsArray.pop();
 
-        return User.findByIdAndUpdate(userId, {
+        return User.findByIdAndUpdate(req.user._id, {
           $pull: {
             "cart": { $in: copyIds }
           },
