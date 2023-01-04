@@ -9,6 +9,9 @@
 
   <main>
     <h2>Sign Up</h2>
+    <p class="signup-error <%= errorMessage ? null : 'hidden' %>">
+      <%= errorMessage %>
+    </p>
     <form method="POST" action="/auth/signup">
       <label for="signup-email">Email: </label>
       <input id="signup-email" type="email" name="username">

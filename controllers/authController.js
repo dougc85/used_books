@@ -3,15 +3,39 @@ const User = require('../models/user');
 const bcrypt = require('bcryptjs');
 
 exports.getLogin = (req, res, next) => {
-  res.render('auth/login');
+  const flashes = req.flash('error');
+  let message = null;
+
+  if (flashes.length > 0) {
+    message = flashes[0];
+  }
+
+  res.render('auth/login', { errorMessage: message });
 };
 
 exports.postLogin = (req, res, next) => {
+  const { username, password } = req.body;
 
+  User.findOne({ email: username })
+    .then(user => {
+      if (!user) {
+        res.redirect('/auth/login');
+        return;
+      }
+
+
+    })
 };
 
 exports.getSignup = (req, res, next) => {
-  res.render('auth/signup');
+  const flashes = req.flash('error');
+  let message = null;
+
+  if (flashes.length > 0) {
+    message = flashes[0];
+  }
+
+  res.render('auth/signup', { errorMessage: message });
 }
 
 exports.postSignup = (req, res, next) => {
@@ -21,6 +45,7 @@ exports.postSignup = (req, res, next) => {
   User.findOne({ email: username })
     .then(user => {
       if (user) {
+        req.flash('error', "Email already in use");
         res.redirect('/auth/signup');
       } else {
         bcrypt.hash(password, 12)

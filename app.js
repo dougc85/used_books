@@ -7,6 +7,7 @@ const MongoStore = require('connect-mongo');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const bcrypt = require('bcryptjs');
+const flash = require('connect-flash');
 // const secrets = require('./secrets');
 
 const User = require('./models/user');
@@ -69,6 +70,7 @@ app.use(session({
   store: sessionStore,
 }));
 
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 

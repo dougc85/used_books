@@ -9,7 +9,16 @@
 
   <main>
     <h2>Log In</h2>
-    <hr>
+    <p class="login-error <%= errorMessage ? null : 'hidden' %>">
+      <%= errorMessage %>
+    </p>
+    <form method="POST" action="/auth/login">
+      <label for="signup-email">Email: </label>
+      <input id="signup-email" type="email" name="username">
+      <label for="signup-password">Password: </label>
+      <input id="signup-password" type="password" name="password">
+      <button>Submit</button>
+    </form>
 
   </main>
   <footer>
