@@ -9,6 +9,7 @@ const LocalStrategy = require('passport-local');
 const bcrypt = require('bcryptjs');
 // const secrets = require('./secrets');
 
+const User = require('./models/user');
 const get404 = require('./controllers/404Controller');
 const getIndex = require('./controllers/indexController');
 
@@ -27,11 +28,7 @@ const sessionStore = new MongoStore({
 })
 
 function validatePassword(password, user) {
-  bcrypt.compare(password, user.password)
-    .then(result => result)
-    .catch(err => {
-      console.log(err);
-    })
+
 }
 
 passport.use(new LocalStrategy(
@@ -41,17 +38,20 @@ passport.use(new LocalStrategy(
         if (!user) {
           return cb(null, false)
         }
-        if (validatePassword(password, user)) {
-          return cb(null, user);
-        } else {
-          return cb(null, false);
-        }
+        bcrypt.compare(password, user.password)
+          .then(passwordIsValid => {
+            if (passwordIsValid) {
+              return cb(null, user);
+            } else {
+              return cb(null, false);
+            }
+          })
       })
   }
 ));
 
 passport.serializeUser(function (user, cb) {
-  cb(null, user.id);
+  cb(null, user._id);
 });
 passport.deserializeUser(function (id, cb) {
   User.findById(id, function (err, user) {
