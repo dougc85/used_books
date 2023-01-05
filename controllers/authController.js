@@ -1,7 +1,15 @@
 const User = require('../models/user');
-
 const bcrypt = require('bcryptjs');
 const { session } = require('passport');
+const nodemailer = require('nodemailer');
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.EMAIL_ADDRESS,
+    pass: process.env.EMAIL_PASSWORD,
+  }
+});
 
 exports.getLogin = (req, res, next) => {
   const flashes = req.flash('error');
@@ -27,13 +35,13 @@ exports.postLogin = (err, req, res, next) => {
 };
 
 exports.getSignup = (req, res, next) => {
+
   const flashes = req.flash('error');
   let message = null;
 
   if (flashes.length > 0) {
     message = flashes[0];
   }
-  req.flash('error', "Email already in use");
   res.render('auth/signup', { errorMessage: message });
 }
 
