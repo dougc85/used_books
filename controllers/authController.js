@@ -2,6 +2,7 @@ const User = require('../models/user');
 const bcrypt = require('bcryptjs');
 const { session } = require('passport');
 const nodemailer = require('nodemailer');
+const crypto = require('crypto');
 
 const transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -50,11 +51,62 @@ exports.getPasswordReset = (req, res, next) => {
     type = 'success';
   }
 
-  res.render('auth/passwordreset', { message });
+  res.render('auth/passwordreset', { message, type });
 }
 
 exports.postPasswordReset = (req, res, next) => {
 
+  const { email } = req.body;
+
+  User.findOne({ email })
+    .then(user => {
+      if (!user) {
+        req.flash('error', `The email '${email}' was not found`);
+        req.session.save(() => {
+          res.redirect('/auth/passwordreset');
+        })
+
+        return;
+      }
+
+      crypto.randomBytes(32, (err, buffer) => {
+        if (err) {
+          console.log(err);
+          res.redirect('/auth/passwordreset');
+          return;
+        }
+        const token = buffer.toString('hex');
+        user.pwResetToken = token;
+        user.pwResetTokenExp = Date.now() + 3600000;
+        user.save()
+          .then(result => {
+            const mailOptions = {
+              from: process.env.EMAIL_ADDRESS,
+              to: email,
+              subject: "Password Reset for Doug's Used Books",
+              html: `
+              <p>You have requested a Password Reset from Doug's Used Books</p>
+              <p>Click the link below to proceed</p>
+              <a href="${process.env.APP_URL}/newpassword/${token}">Reset Password</a>
+            `
+            }
+            transporter.sendMail(mailOptions, function (err, info) {
+              if (err) {
+                console.log(err);
+                req.flash('error', `A network error occurred.  Please try again.`);
+                req.session.save(() => {
+                  res.redirect('/auth/passwordreset');
+                })
+                return;
+              }
+              req.flash('success', `Success! Check your email (or spam folder) for reset instructions.`);
+              req.session.save(() => {
+                res.redirect('/auth/passwordreset');
+              })
+            })
+          })
+      })
+    })
 }
 
 exports.getSignup = (req, res, next) => {
@@ -76,7 +128,9 @@ exports.postSignup = (req, res, next) => {
     .then(user => {
       if (user) {
         req.flash('error', "Email already in use");
-        res.redirect('/auth/signup');
+        req.session.save(() => {
+          res.redirect('/auth/signup');
+        })
       } else {
         bcrypt.hash(password, 12)
           .then(hashedPW => {

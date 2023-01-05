@@ -29,6 +29,8 @@ const userSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'BookInStock'
   }],
+  pwResetToken: String,
+  pwResetTokenExp: Date,
 });
 
 module.exports = mongoose.model('User', userSchema);
