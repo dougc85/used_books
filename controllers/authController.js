@@ -51,7 +51,7 @@ exports.getPasswordReset = (req, res, next) => {
     type = 'success';
   }
 
-  res.render('auth/passwordreset', { message, type });
+  res.render('auth/passwordReset', { message, type });
 }
 
 exports.postPasswordReset = (req, res, next) => {
