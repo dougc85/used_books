@@ -89,7 +89,7 @@ exports.postPasswordReset = (req, res, next) => {
               html: `
               <p>You have requested a Password Reset from Doug's Used Books</p>
               <p>Click the link below to proceed</p>
-              <a href="${process.env.APP_URL}/newpassword/${token}">Reset Password</a>
+              <a href="${process.env.APP_URL}/auth/newpassword/${token}">Reset Password</a>
             `
             }
             transporter.sendMail(mailOptions, function (err, info) {
@@ -109,6 +109,42 @@ exports.postPasswordReset = (req, res, next) => {
           })
       })
     })
+}
+
+exports.getNewPassword = (req, res, next) => {
+
+  User.findOne({ pwResetToken: req.params.token })
+    .then(user => {
+      if (!user) {
+        res.redirect('/auth/login');
+        return;
+      }
+      if (Date.now() > user.pwResetTokenExp) {
+        req.flash('error', `Password reset email link expired 1 hour after request. Try again.`);
+        res.redirect('/auth/passwordreset');
+      }
+
+      const flashes = req.flash('error');
+
+      let message = null;
+
+      if (flashes.length > 0) {
+        message = flashes[0];
+      }
+      res.render('auth/newPassword', { message, token: req.params.token });
+    })
+}
+
+exports.postNewPassword = (req, res, next) => {
+  const { password1, password2 } = req.body;
+
+  if (password1 !== password2) {
+    req.flash('error', `Entered passwords do not match. Try again.`);
+    req.session.save(() => {
+      res.redirect(`/auth/newpassword/${req.params.token}`);
+      return;
+    })
+  }
 }
 
 exports.getSignup = (req, res, next) => {
