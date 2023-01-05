@@ -9,14 +9,14 @@
 
   <main>
     <h2>Log In</h2>
-    <p class="login-error <%= errorMessage ? null : 'hidden' %>">
-      <%= errorMessage %>
+    <p class="login-message <%= type === 'error' ? 'login-error' : 'login-success'%> <%= message ? null : 'hidden' %>">
+      <%= message %>
     </p>
     <form method="POST" action="/auth/login">
-      <label for="signup-email">Email: </label>
-      <input id="signup-email" type="email" name="username">
-      <label for="signup-password">Password: </label>
-      <input id="signup-password" type="password" name="password">
+      <label for="login-email">Email: </label>
+      <input id="login-email" type="email" name="username">
+      <label for="login-password">Password: </label>
+      <input id="login-password" type="password" name="password">
       <button>Submit</button>
       <a href="/auth/passwordreset">Trouble logging in?</a>
     </form>

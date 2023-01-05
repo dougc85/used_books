@@ -45,6 +45,7 @@ form button {
   border-radius: 5px;
   background-color: white;
   margin-bottom: 4.5rem;
+  cursor: pointer;
 }
 
 form a {
@@ -52,8 +53,7 @@ form a {
   font-size: 1.6rem;
 }
 
-.login-error {
-  background-color: #fe6c6c66;
+.login-message {
   font-size: 1.6rem;
   font-weight: bold;
   width: 100%;
@@ -62,6 +62,14 @@ form a {
   margin: 1rem auto;
   text-align: center;
   border-radius: 3px;
+}
+
+.login-error {
+  background-color: #fe6c6c66;
+}
+
+.login-success {
+  background-color: #6cfe6e66;
 }
 
 .hidden {

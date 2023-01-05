@@ -13,14 +13,21 @@ const transporter = nodemailer.createTransport({
 });
 
 exports.getLogin = (req, res, next) => {
-  const flashes = req.flash('error');
-  let message = null;
+  const errorFlashes = req.flash('error');
+  const successFlashes = req.flash('success');
 
-  if (flashes.length > 0) {
-    message = flashes[0];
+  let message = null;
+  let type = null;
+
+  if (errorFlashes.length > 0) {
+    message = errorFlashes[0];
+    type = 'error';
+  } else if (successFlashes.length > 0) {
+    message = successFlashes[0];
+    type = 'success';
   }
 
-  res.render('auth/login', { errorMessage: message });
+  res.render('auth/login', { message, type });
 };
 
 
@@ -122,6 +129,7 @@ exports.getNewPassword = (req, res, next) => {
       if (Date.now() > user.pwResetTokenExp) {
         req.flash('error', `Password reset email link expired 1 hour after request. Try again.`);
         res.redirect('/auth/passwordreset');
+        return;
       }
 
       const flashes = req.flash('error');
@@ -145,6 +153,32 @@ exports.postNewPassword = (req, res, next) => {
       return;
     })
   }
+
+  let userObj;
+
+  User.findOne({ pwResetToken: req.params.token })
+    .then(user => {
+      if (!user) {
+        res.redirect('/auth/login');
+        return;
+      }
+      if (Date.now() > user.pwResetTokenExp) {
+        req.flash('error', `Password reset email link expired 1 hour after request. Try again.`);
+        res.redirect('/auth/passwordreset');
+        return;
+      }
+      userObj = user;
+      return bcrypt.hash(password1, 12);
+    })
+    .then(hashedPW => {
+      userObj.password = hashedPW
+
+      return userObj.save();
+    })
+    .then(() => {
+      req.flash('success', `Success! You successfully changed your password.`);
+      res.redirect('/auth/login');
+    })
 }
 
 exports.getSignup = (req, res, next) => {
