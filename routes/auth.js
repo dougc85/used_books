@@ -10,10 +10,12 @@ const {
   getSignup,
   postSignup,
   postLogout,
+  getPasswordReset,
 } = require('../controllers/authController');
 
 router.get("/login", isLoggedIn, getLogin);
 router.post("/login", isLoggedIn, passport.authenticate('local', { successRedirect: '/shop' }), postLogin);
+router.get("/passwordreset", isLoggedIn, getPasswordReset);
 
 router.get("/signup", isLoggedIn, getSignup);
 router.post("/signup", isLoggedIn, postSignup);

@@ -34,6 +34,29 @@ exports.postLogin = (err, req, res, next) => {
   }
 };
 
+exports.getPasswordReset = (req, res, next) => {
+
+  const errorFlashes = req.flash('error');
+  const successFlashes = req.flash('success');
+
+  let message = null;
+  let type = null;
+
+  if (errorFlashes.length > 0) {
+    message = errorFlashes[0];
+    type = 'error';
+  } else if (successFlashes.length > 0) {
+    message = successFlashes[0];
+    type = 'success';
+  }
+
+  res.render('auth/passwordreset', { message });
+}
+
+exports.postPasswordReset = (req, res, next) => {
+
+}
+
 exports.getSignup = (req, res, next) => {
 
   const flashes = req.flash('error');
