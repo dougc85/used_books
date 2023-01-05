@@ -36,6 +36,9 @@ function validatePassword(password, user) {
 
 passport.use(new LocalStrategy(
   function (username, password, cb) {
+
+    username = username.toLowerCase().trim();
+
     User.findOne({ email: username })
       .then((user) => {
         if (!user) {

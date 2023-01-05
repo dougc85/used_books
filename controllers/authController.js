@@ -56,7 +56,9 @@ exports.getPasswordReset = (req, res, next) => {
 
 exports.postPasswordReset = (req, res, next) => {
 
-  const { email } = req.body;
+  let { email } = req.body;
+
+  email = email.toLowerCase().trim();
 
   User.findOne({ email })
     .then(user => {
@@ -122,7 +124,9 @@ exports.getSignup = (req, res, next) => {
 
 exports.postSignup = (req, res, next) => {
 
-  const { username, password } = req.body;
+  let { username, password } = req.body;
+
+  username = username.toLowerCase().trim();
 
   User.findOne({ email: username })
     .then(user => {
