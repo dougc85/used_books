@@ -2,6 +2,8 @@ const Book = require('../../models/book');
 const Genre = require('../../models/genre');
 const Author = require('../../models/author');
 
+const errorFunction = require('../../utilities/errorFunction');
+
 exports.getBookCatalogue = async function (req, res, next) {
 
   Book
@@ -11,6 +13,7 @@ exports.getBookCatalogue = async function (req, res, next) {
     .then((books) => {
       res.render('admin/bookCatalogue', { books, backText: 'Admin', backHref: '/admin' });
     })
+    .catch(errorFunction(next));
 }
 
 exports.getAddBookToCatalogue = async (req, res, next) => {
@@ -29,6 +32,7 @@ exports.getAddBookToCatalogue = async (req, res, next) => {
 
       res.render('admin/addEditCatalogueBook', { authors, genres, edit: false, book: undefined, backText: 'Catalogue', backHref: '/admin/book_catalogue' })
     })
+    .catch(errorFunction(next));
 }
 
 exports.postAddBookToCatalogue = (req, res, next) => {
@@ -65,9 +69,7 @@ exports.postAddBookToCatalogue = (req, res, next) => {
     .then(() => {
       res.redirect("/admin/book_catalogue");
     })
-    .catch((err) => {
-      console.log(err);
-    })
+    .catch(errorFunction(next));
 }
 
 exports.getCatalogueBookPage = (req, res, next) => {
@@ -77,6 +79,7 @@ exports.getCatalogueBookPage = (req, res, next) => {
     .then((book) => {
       res.render('admin/catalogueBook', { book, backText: 'Catalogue', backHref: '/admin/book_catalogue' });
     })
+    .catch(errorFunction(next));
 }
 
 exports.getEditCatalogueBookPage = (req, res, next) => {
@@ -96,7 +99,7 @@ exports.getEditCatalogueBookPage = (req, res, next) => {
       const [authors, genres, book] = resultsArray;
       res.render('admin/addEditCatalogueBook', { authors, genres, book, edit: true, backHref: '/admin' + req.url.slice(0, -5), backText: 'Book Info' });
     })
-    .catch(err => { console.log(err) });
+    .catch(errorFunction(next));
 }
 
 exports.postEditCatalogueBookPage = (req, res, next) => {
@@ -109,64 +112,62 @@ exports.postEditCatalogueBookPage = (req, res, next) => {
     bookId
   } = req.body;
 
-  Book.findOne({ _id: bookId }).then(oldBook => {
+  Book.findOne({ _id: bookId })
+    .then(oldBook => {
 
-    const promises = [];
+      const promises = [];
 
-    const bookPromise = Book.findOneAndUpdate({ _id: bookId }, {
-      title: title.trim(),
-      imageURL: imageURL.trim(),
-      author,
-      genre,
-      description: description.trim(),
+      const bookPromise = Book.findOneAndUpdate({ _id: bookId }, {
+        title: title.trim(),
+        imageURL: imageURL.trim(),
+        author,
+        genre,
+        description: description.trim(),
+      })
+
+      promises.push(bookPromise);
+
+      if (author !== oldBook.author.toString()) {
+        const authorPromise = Author.findOneAndUpdate({ _id: author }, {
+          $addToSet: {
+            "books": bookId,
+          }
+        });
+
+        promises.push(authorPromise);
+
+        const oldAuthorPromise = Author.findOneAndUpdate({ _id: oldBook.author }, {
+          $pull: {
+            "books": bookId,
+          }
+        })
+
+        promises.push(oldAuthorPromise);
+      }
+
+      if (genre !== oldBook.genre.toString()) {
+        const genrePromise = Genre.findOneAndUpdate({ _id: genre }, {
+          $addToSet: {
+            "books": bookId,
+          }
+        });
+
+        promises.push(genrePromise);
+
+        const oldGenrePromise = Genre.findOneAndUpdate({ _id: oldBook.genre }, {
+          $pull: {
+            "books": bookId,
+          }
+        })
+
+        promises.push(oldGenrePromise);
+      }
+
+      Promise.all(promises)
+        .then((result) => {
+          res.redirect("/admin/book_catalogue/" + bookId);
+        })
+        .catch(errorFunction(next));
     })
-
-    promises.push(bookPromise);
-
-    if (author !== oldBook.author.toString()) {
-      const authorPromise = Author.findOneAndUpdate({ _id: author }, {
-        $addToSet: {
-          "books": bookId,
-        }
-      });
-
-      promises.push(authorPromise);
-
-      const oldAuthorPromise = Author.findOneAndUpdate({ _id: oldBook.author }, {
-        $pull: {
-          "books": bookId,
-        }
-      })
-
-      promises.push(oldAuthorPromise);
-    }
-
-    if (genre !== oldBook.genre.toString()) {
-      const genrePromise = Genre.findOneAndUpdate({ _id: genre }, {
-        $addToSet: {
-          "books": bookId,
-        }
-      });
-
-      promises.push(genrePromise);
-
-      const oldGenrePromise = Genre.findOneAndUpdate({ _id: oldBook.genre }, {
-        $pull: {
-          "books": bookId,
-        }
-      })
-
-      promises.push(oldGenrePromise);
-    }
-
-    Promise.all(promises)
-      .then((result) => {
-        res.redirect("/admin/book_catalogue/" + bookId);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-  })
-
-
+    .catch(errorFunction(next));
 }

@@ -3,6 +3,8 @@ const Book = require('../models/book');
 const Author = require('../models/author');
 const Genre = require('../models/genre');
 
+const errorFunction = require('../utilities/errorFunction');
+
 exports.getIndex = (req, res, next) => {
   const frontPagePromise =
     FrontPage
@@ -22,9 +24,11 @@ exports.getIndex = (req, res, next) => {
       })
       .exec();
 
-  Promise.all([frontPagePromise]).then(([frontPage]) => {
-    res.render('shop/shopIndex', { frontPage });
-  })
+  Promise.all([frontPagePromise])
+    .then(([frontPage]) => {
+      res.render('shop/shopIndex', { frontPage });
+    })
+    .catch(errorFunction(next));
 }
 
 exports.getShopByTitle = (req, res, next) => {
@@ -41,6 +45,7 @@ exports.getShopByTitle = (req, res, next) => {
       }
       res.render('shop/shopByTitle', { books: booksWithCopies });
     })
+    .catch(errorFunction(next));
 }
 
 exports.getShopBookPage = (req, res, next) => {
@@ -51,6 +56,7 @@ exports.getShopBookPage = (req, res, next) => {
     .then((book) => {
       res.render('shop/shopBookPage', { book });
     })
+    .catch(errorFunction(next));
 }
 
 exports.getShopByAuthor = (req, res, next) => {
@@ -61,6 +67,7 @@ exports.getShopByAuthor = (req, res, next) => {
     .then((authors) => {
       res.render('shop/shopByAuthor', { authors });
     })
+    .catch(errorFunction(next));
 };
 
 exports.getShopByOneAuthor = (req, res, next) => {
@@ -70,6 +77,7 @@ exports.getShopByOneAuthor = (req, res, next) => {
     .then(author => {
       res.render('shop/shopByOneAuthor', { author });
     })
+    .catch(errorFunction(next));
 };
 
 exports.getShopByGenre = (req, res, next) => {
@@ -86,6 +94,7 @@ exports.getShopByGenre = (req, res, next) => {
 
       res.render('shop/shopByGenre', { genres: genresWithBooks });
     })
+    .catch(errorFunction(next));
 };
 
 exports.getShopByOneGenre = (req, res, next) => {
@@ -95,4 +104,5 @@ exports.getShopByOneGenre = (req, res, next) => {
     .then(genre => {
       res.render('shop/shopByOneGenre', { genre });
     })
+    .catch(errorFunction(next));
 };

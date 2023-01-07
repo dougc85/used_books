@@ -1,6 +1,8 @@
 const User = require('../models/user');
 const Order = require('../models/order');
 
+const errorFunction = require('../utilities/errorFunction');
+
 exports.getOrders = (req, res, next) => {
   User
     .findOne({ _id: req.user._id })
@@ -20,6 +22,7 @@ exports.getOrders = (req, res, next) => {
     .then((user) => {
       res.render('orders/orders', { orders: user.orders })
     })
+    .catch(errorFunction(next));
 }
 
 exports.getOrder = (req, res, next) => {
@@ -35,4 +38,5 @@ exports.getOrder = (req, res, next) => {
     .then((order) => {
       res.render('orders/order', { order })
     })
+    .catch(errorFunction(next));
 }

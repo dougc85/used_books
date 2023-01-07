@@ -13,7 +13,6 @@ const isCustomer = require('./middleware/isCustomer');
 // const secrets = require('./secrets');
 
 const User = require('./models/user');
-const get404 = require('./controllers/404Controller');
 const getIndex = require('./controllers/indexController');
 
 const adminRoutes = require('./routes/admin');
@@ -21,6 +20,11 @@ const shopRoutes = require('./routes/shop');
 const cartRoutes = require('./routes/cart');
 const ordersRoutes = require('./routes/orders');
 const authRoutes = require('./routes/auth');
+
+const {
+  get404,
+  get500
+} = require('./controllers/errorController');
 
 const app = express();
 const mongoDB = process.env.MONGODB_URI;
@@ -99,7 +103,13 @@ app.use("/shop", shopRoutes);
 app.use("/cart", isCustomer, cartRoutes);
 app.use("/orders", isCustomer, ordersRoutes);
 app.use("/auth", authRoutes);
+app.use("/500", get500);
 app.use("/", get404);
+
+app.use((err, req, res, next) => {
+  console.log(err);
+  res.redirect('/500');
+})
 
 
 

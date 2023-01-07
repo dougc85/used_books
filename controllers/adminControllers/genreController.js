@@ -1,6 +1,8 @@
 
 const Genre = require('../../models/genre');
 
+const errorFunction = require('../../utilities/errorFunction');
+
 exports.getGenres = (req, res, next) => {
   Genre
     .find()
@@ -8,6 +10,7 @@ exports.getGenres = (req, res, next) => {
     .then((genres) => {
       res.render('admin/genres', { genres, backText: 'Admin', backHref: '/admin' });
     })
+    .catch(errorFunction(next));
 }
 
 exports.getAddGenre = (req, res, next) => {
@@ -24,16 +27,15 @@ exports.postAddGenre = (req, res, next) => {
     .then(() => {
       res.redirect("/admin/genres");
     })
-    .catch((err) => {
-      console.log(err);
-    })
+    .catch(errorFunction(next));
 }
 
 exports.getEditGenre = (req, res, next) => {
   Genre.findById(req.params.genreId)
     .then((genre) => {
       res.render('admin/addEditGenre', { genre, edit: true, backHref: '/admin/genres', backText: 'Genres' });
-    });
+    })
+    .catch(errorFunction(next));
 }
 
 exports.postEditGenre = (req, res, next) => {
@@ -46,8 +48,6 @@ exports.postEditGenre = (req, res, next) => {
     .then((result) => {
       res.redirect("/admin/genres/");
     })
-    .catch((err) => {
-      console.log(err);
-    })
+    .catch(errorFunction(next));
 }
 

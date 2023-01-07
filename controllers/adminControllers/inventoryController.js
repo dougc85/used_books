@@ -1,6 +1,8 @@
 const Book = require('../../models/book');
 const BookInStock = require('../../models/bookInStock');
 
+const errorFunction = require('../../utilities/errorFunction');
+
 const conditions = ['Like New', 'Good', 'Fair', 'Poor'];
 
 exports.getInventory = (req, res, next) => {
@@ -16,9 +18,7 @@ exports.getInventory = (req, res, next) => {
       }
       res.render("admin/inventory", { catalogueBooks: bookArray, backText: 'Admin', backHref: '/admin' });
     })
-    .catch(err => {
-      console.log(err);
-    })
+    .catch(errorFunction(next));
 }
 
 exports.getAddToInventory = (req, res, next) => {
@@ -28,6 +28,7 @@ exports.getAddToInventory = (req, res, next) => {
     .then(catalogueBooks => {
       res.render("admin/addEditInventoryBook", { catalogueBooks, conditions, edit: false, copy: undefined, backText: 'Inventory', backHref: '/admin/inventory' })
     })
+    .catch(errorFunction(next));
 }
 
 exports.postAddToInventory = (req, res, next) => {
@@ -64,9 +65,7 @@ exports.postAddToInventory = (req, res, next) => {
     .then(() => {
       res.redirect("/admin/inventory");
     })
-    .catch((err) => {
-      console.log(err);
-    })
+    .catch(errorFunction(next));
 }
 
 exports.getInventoryBook = (req, res, next) => {
@@ -75,6 +74,7 @@ exports.getInventoryBook = (req, res, next) => {
     .then((book) => {
       res.render('admin/inventoryBook', { book, backText: 'Inventory', backHref: '/admin/inventory' });
     })
+    .catch(errorFunction(next));
 }
 
 exports.getEditInventoryCopy = (req, res, next) => {
@@ -94,7 +94,7 @@ exports.getEditInventoryCopy = (req, res, next) => {
       const [catalogueBooks, copy] = resultsArray;
       res.render('admin/addEditInventoryBook', { conditions, catalogueBooks, copy, edit: true, backHref: '/admin' + backURL, backText: 'Book Copies' })
     })
-    .catch(err => { console.log(err) });
+    .catch(errorFunction(next));
 }
 
 exports.postEditInventoryCopy = (req, res, next) => {
@@ -122,9 +122,7 @@ exports.postEditInventoryCopy = (req, res, next) => {
     .then((result) => {
       res.redirect("/admin/inventory/" + bookId);
     })
-    .catch((err) => {
-      console.log(err);
-    })
+    .catch(errorFunction(next));
 }
 
 exports.postEditCatalogueBookPage = (req, res, next) => {
@@ -147,7 +145,5 @@ exports.postEditCatalogueBookPage = (req, res, next) => {
     .then((result) => {
       res.redirect("/admin/book_catalogue/" + bookId);
     })
-    .catch((err) => {
-      console.log(err);
-    })
+    .catch(errorFunction(next));
 }

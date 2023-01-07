@@ -4,6 +4,8 @@ const { session } = require('passport');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 
+const errorFunction = require('../utilities/errorFunction');
+
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -114,8 +116,10 @@ exports.postPasswordReset = (req, res, next) => {
               })
             })
           })
+          .catch(errorFunction(next));
       })
     })
+    .catch(errorFunction(next));
 }
 
 exports.getNewPassword = (req, res, next) => {
@@ -141,6 +145,7 @@ exports.getNewPassword = (req, res, next) => {
       }
       res.render('auth/newPassword', { message, token: req.params.token });
     })
+    .catch(errorFunction(next));
 }
 
 exports.postNewPassword = (req, res, next) => {
@@ -179,6 +184,7 @@ exports.postNewPassword = (req, res, next) => {
       req.flash('success', `Success! You successfully changed your password.`);
       res.redirect('/auth/login');
     })
+    .catch(errorFunction(next));
 }
 
 exports.getSignup = (req, res, next) => {
@@ -223,8 +229,10 @@ exports.postSignup = (req, res, next) => {
               res.redirect('/shop');
             });
           })
+          .catch(errorFunction(next));
       }
     })
+    .catch(errorFunction(next));
 }
 
 exports.postLogout = (req, res, next) => {
