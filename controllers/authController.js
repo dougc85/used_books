@@ -98,7 +98,7 @@ exports.postPasswordReset = (req, res, next) => {
               html: `
               <p>You have requested a Password Reset from Doug's Used Books</p>
               <p>Click the link below to proceed</p>
-              <a href="${process.env.APP_URL}/auth/newpassword/${token}">Reset Password</a>
+              <a href="${req.protocol + '://' + req.get('host')}/auth/newpassword/${token}">Reset Password</a>
             `
             }
             transporter.sendMail(mailOptions, function (err, info) {
