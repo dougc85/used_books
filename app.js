@@ -10,7 +10,6 @@ const bcrypt = require('bcryptjs');
 const flash = require('connect-flash');
 const isAuth = require('./middleware/isAdmin');
 const isCustomer = require('./middleware/isCustomer');
-// const secrets = require('./secrets');
 
 const User = require('./models/user');
 const getIndex = require('./controllers/indexController');
@@ -33,10 +32,6 @@ const sessionStore = new MongoStore({
   mongoUrl: mongoDB,
   collectionName: 'sessions',
 })
-
-function validatePassword(password, user) {
-
-}
 
 passport.use(new LocalStrategy(
   function (username, password, cb) {
