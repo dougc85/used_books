@@ -30,7 +30,6 @@ const bookSchema = new Schema({
   },
   copies: [{
     type: Schema.Types.ObjectId,
-    required: true,
     ref: 'BookInStock'
   }]
 });

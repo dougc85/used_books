@@ -36,7 +36,6 @@ const authorSchema = new Schema({
   },
   books: [{
     type: Schema.Types.ObjectId,
-    required: true,
     ref: 'Book'
   }]
 });
